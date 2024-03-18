@@ -2,11 +2,8 @@
 
 namespace Domain
 {
-    public class SprintBacklog : ISprint
+    public class SprintBacklog
     {
-        private String name;
-        private DateTime startDate;
-        private DateTime endDate;
-        private Boolean completed;
+        private IEnumerable<BacklogItem> backlogItems;
     }
 }
