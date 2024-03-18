@@ -10,6 +10,8 @@ namespace Portal
             EmployeeFactory factory = new EmployeeFactory();
             IEmployee testdeveloper = factory.CreateEmployee("Developer");
             IEmployee testproductowner = factory.CreateEmployee("ProductOwner");
+
+            Console.WriteLine(testdeveloper);
         }
     }
 }
