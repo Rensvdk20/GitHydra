@@ -5,9 +5,12 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{D01DDECB-BAFE-4E70-B0F0-FF2DB4A9C41C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainServices", "DomainServices\DomainServices.csproj", "{2AEB80E4-F153-428D-98B3-1B566BF0DB0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainServices", "DomainServices\DomainServices.csproj", "{2AEB80E4-F153-428D-98B3-1B566BF0DB0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{FF9049EA-64F6-405F-B7F7-ADC8ED08745E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{FF9049EA-64F6-405F-B7F7-ADC8ED08745E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2AEB80E4-F153-428D-98B3-1B566BF0DB0A} = {2AEB80E4-F153-428D-98B3-1B566BF0DB0A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
