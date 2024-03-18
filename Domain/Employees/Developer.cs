@@ -1,6 +1,8 @@
-﻿namespace Domain.Employees
+﻿using DomainServices;
+
+namespace Domain.Employees
 {
-    public class Developer
+    public class Developer : IEmployee
     {
     }
 }
