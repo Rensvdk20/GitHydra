@@ -2,5 +2,6 @@
 {
     public class Backlog
     {
+        private List<BacklogItem> backlogItems = new List<BacklogItem>();
     }
 }
