@@ -17,7 +17,7 @@ namespace Portal
             Console.WriteLine(testdeveloper);
             Console.WriteLine(testproductowner);
 
-            var sprint = new ReleaseSprint("test", DateTime.Now, DateTime.Now, new ScrumMaster(), new ExportPDF());
+            var sprint = new ReleaseSprint("test", DateTime.Now, DateTime.Now, new ScrumMaster("Hans", "hans@mail.com"), new ExportPDF());
             sprint.Export();
         }
     }
