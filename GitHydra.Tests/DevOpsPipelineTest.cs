@@ -3,25 +3,8 @@ using Infrastructure.DevOps;
 
 namespace GitHydra.Tests
 {
-    public class DevOpsPipelineTest : IDisposable
+    public class DevOpsPipelineTest
     {
-
-        private readonly StringWriter _writer;
-        private readonly TextWriter _originalConsoleOut;
-
-        public DevOpsPipelineTest()
-        {
-            _writer = new StringWriter();
-            _originalConsoleOut = Console.Out;
-            Console.SetOut(_writer);
-        }
-
-        public void Dispose()
-        {
-            Console.SetOut(_originalConsoleOut);
-            _writer.Dispose();
-        }
-
         [Fact]
         public void Source_Method_Calls_Console_WriteLine()
         {
