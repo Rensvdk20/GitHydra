@@ -66,5 +66,10 @@ namespace Domain
         {
             this.sprintState = state;
         }
+
+        public void SprintInProgress()
+        {
+            sprintBacklog.SprintInProgress();
+        }
     }
 }

@@ -5,10 +5,10 @@ namespace Domain
 {
     public class BacklogItem :  IBacklogItemContext
     {
-        private IEnumerable<Activity> _activities;
-        private IEnumerable<IThread> _threads;
-        private readonly Developer developer;
-
+        private List<Activity> _activities;
+        private List<IThread> _threads;
+        private Developer developer;
+        private bool backlogItemLocked = false;
         private IBacklogItemState _currentState;
 
         public BacklogItem(Developer developer)
@@ -30,5 +30,35 @@ namespace Domain
         public IBacklogItemState GetState() => _currentState;
 
         public void MoveToDoing() => this._currentState!.MoveToDoing();
+
+        public void AddActivity(Activity activity)
+        {
+            if (!backlogItemLocked)
+            {
+                _activities.Add(activity);
+            }
+        }
+
+        public void AddThread(Thread thread)
+        {
+            if (!backlogItemLocked)
+            {
+                _threads.Add(thread);
+            }
+        }
+
+        public void SetDeveloper(Developer developer)
+        {
+            this.developer = developer;
+        }
+
+        public void SprintInProgress()
+        {
+            backlogItemLocked = true;
+            foreach (var activity in this._activities)
+            {
+                activity.LockActivity();
+            }
+        }
     }
 }
