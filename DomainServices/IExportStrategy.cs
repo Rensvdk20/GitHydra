@@ -8,7 +8,6 @@ namespace DomainServices
 {
     public interface IExportStrategy
     {
-        void ExportToPNG();
-        void ExportToPDF();
+        void Export(ISprint sprint);
     }
 }
