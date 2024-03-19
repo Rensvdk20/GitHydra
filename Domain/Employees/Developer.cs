@@ -4,10 +4,10 @@ namespace Domain.Employees
 {
     public class Developer : IEmployee
     {
-        private String name;
-        private String email;
+        public String name { get; }
+        public String email { get; }
 
-        public Developer(string name, string email)
+        public Developer(String name, String email)
         {
             this.name = name;
             this.email = email;

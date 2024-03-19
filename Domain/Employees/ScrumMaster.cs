@@ -4,8 +4,8 @@ namespace Domain.Employees
 {
     public class ScrumMaster : IEmployee
     {
-        private String name;
-        private String email;
+        public String name { get; }
+        public String email { get; }
 
         public ScrumMaster(String name, String email)
         {

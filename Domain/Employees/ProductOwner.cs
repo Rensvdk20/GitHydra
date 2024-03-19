@@ -4,10 +4,10 @@ namespace Domain.Employees
 {
     public class ProductOwner : IEmployee
     {
-        private String name;
-        private String email;
+        public String name { get; }
+        public String email { get; }
 
-        public ProductOwner(string name, string email)
+        public ProductOwner(String name, String email)
         {
             this.name = name;
             this.email = email;
