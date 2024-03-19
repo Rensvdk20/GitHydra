@@ -25,7 +25,7 @@ namespace Domain
             this.scrumMaster = scrumMaster;
         }
 
-        public string toString()
+        public override string ToString()
         {
             return this.name;
         }

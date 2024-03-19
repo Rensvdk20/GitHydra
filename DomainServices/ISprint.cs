@@ -2,7 +2,7 @@
 {
     public interface ISprint
     {
-        String toString();
+        String ToString();
         void Export();
     }
 }
