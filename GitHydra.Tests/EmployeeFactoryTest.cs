@@ -1,4 +1,4 @@
-﻿using Infrastructure;
+using Infrastructure;
 using DomainServices;
 using Domain.Employees;
 
