@@ -4,8 +4,24 @@ using Infrastructure.ExportBehaviour;
 
 namespace GitHydra.Tests
 {
-    public class SprintTest
+    public class SprintTest : IDisposable
     {
+        private readonly StringWriter _writer;
+        private readonly TextWriter _originalConsoleOut;
+
+        public SprintTest()
+        {
+            _writer = new StringWriter();
+            _originalConsoleOut = Console.Out;
+            Console.SetOut(_writer);
+        }
+
+        public void Dispose()
+        {
+            Console.SetOut(_originalConsoleOut);
+            _writer.Dispose();
+        }
+
         [Fact]
         public void Export_Sprint_To_PDF()
         {
