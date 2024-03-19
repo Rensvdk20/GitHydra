@@ -7,10 +7,15 @@ namespace Domain.Employees
         private String name;
         private String email;
 
-        public ScrumMaster(string name, string email)
+        public ScrumMaster(String name, String email)
         {
             this.name = name;
             this.email = email;
+        }
+
+        public void CompleteSprint(String sprintName)
+        {
+
         }
     }
 }
