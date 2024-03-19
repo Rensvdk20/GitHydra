@@ -1,8 +1,6 @@
-﻿using Xunit;
 using Infrastructure;
 using DomainServices;
 using Domain.Employees;
-using System;
 
 namespace GitHydra.Tests
 {
