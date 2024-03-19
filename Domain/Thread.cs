@@ -6,7 +6,7 @@ namespace Domain
     {
         private String topic;
         private bool status;
-        private IEnumerable<IMessage> messages = new List<IMessage>();
+        private List<IMessage> messages = new();
 
         public Thread(String topic, bool status)
         {
@@ -16,12 +16,12 @@ namespace Domain
 
         public void AddMessage(IMessage message)
         {
-
+            messages.Add(message);
         }
 
         public void CloseThread()
         {
-
+            this.status = false;
         }
     }
 }
