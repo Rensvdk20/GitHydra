@@ -24,7 +24,7 @@ namespace Domain
             this.endDate = endDate;
             this.exportStrategy = exportStrategy;
             this.scrumMaster = scrumMaster;
-            sprintState = new SprintCreated(this);
+            this.sprintState = new SprintCreated(this);
         }
 
         public override string ToString()
@@ -40,21 +40,6 @@ namespace Domain
         public void Change(string name, DateTime? startDate, DateTime? endDate)
         {
             sprintState.Change(name, startDate, endDate);
-        }
-
-        public void StartSprint()
-        {
-            this.sprintState.StartSprint();
-        }
-
-        public void CancelSprint()
-        {
-            this.sprintState.CancelSprint();
-        }
-
-        public void FinishSprint()
-        {
-            this.sprintState.FinishSprint();
         }
 
         public void SetName(string name)

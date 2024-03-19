@@ -9,9 +9,9 @@ namespace Domain.SprintState
 {
     public class SprintCancelled : ISprintState
     {
-        private readonly ISprint _sprint;
+        private readonly ISprintContext _sprint;
 
-        public SprintCancelled(ISprint sprint)
+        public SprintCancelled(ISprintContext sprint)
         {
             _sprint = sprint;
         }

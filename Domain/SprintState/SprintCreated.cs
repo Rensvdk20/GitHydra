@@ -9,21 +9,21 @@ namespace Domain.SprintState
 {
     public class SprintCreated : ISprintState
     {
-        private readonly ISprint _sprint;
+        private readonly ISprintContext _sprint;
 
-        public SprintCreated(ISprint sprint)
+        public SprintCreated(ISprintContext sprint)
         {
             _sprint = sprint;
         }
 
         public void StartSprint()
         {
-            this._sprint.StartSprint();
+            this._sprint.SetSprintState(new SprintInProgress(_sprint));
         }
 
         public void CancelSprint()
         {
-            this._sprint.CancelSprint();
+            this._sprint.SetSprintState(new SprintCancelled(_sprint));
         }
 
         public void FinishSprint()

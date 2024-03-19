@@ -9,9 +9,9 @@ namespace Domain.SprintState
 {
     public class SprintInProgress : ISprintState
     {
-        private readonly ISprint _sprint;
+        private readonly ISprintContext _sprint;
 
-        public SprintInProgress(ISprint sprint)
+        public SprintInProgress(ISprintContext sprint)
         {
             _sprint = sprint;
         }
@@ -22,12 +22,12 @@ namespace Domain.SprintState
 
         public void CancelSprint()
         {
-            this._sprint.CancelSprint();
+            this._sprint.SetSprintState(new SprintCancelled(_sprint));
         }
 
         public void FinishSprint()
         {
-            this._sprint.FinishSprint();
+            this._sprint.SetSprintState(new SprintFinished(_sprint));
         }
 
         public void Change(string name, DateTime? startDate, DateTime? endDate)

@@ -24,7 +24,7 @@ namespace Domain
             this.endDate = endDate;
             this.exportStrategy = exportStrategy;
             this.scrumMaster = scrumMaster;
-            sprintState = new SprintCreated(this);
+            this.sprintState = new SprintCreated(this);
         }
 
         public override string ToString()
