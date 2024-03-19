@@ -1,4 +1,5 @@
 ﻿using Domain.Employees;
+using Domain.SprintState;
 using DomainServices;
 
 namespace Domain
@@ -23,6 +24,7 @@ namespace Domain
             this.endDate = endDate;
             this.exportStrategy = exportStrategy;
             this.scrumMaster = scrumMaster;
+            this.sprintState = new SprintCreated(this);
         }
 
         public override string ToString()
@@ -33,6 +35,36 @@ namespace Domain
         public void Export()
         {
             this.exportStrategy.Export(this);
+        }
+
+        public void Change(string name, DateTime? startDate, DateTime? endDate)
+        {
+            sprintState.Change(name, startDate, endDate);
+        }
+
+        public void SetName(string name)
+        {
+            this.name = name;
+        }
+
+        public void SetStartDate(DateTime startDate)
+        {
+            this.startDate = startDate;
+        }
+
+        public void SetEndDate(DateTime endDate)
+        {
+            this.endDate = endDate;
+        }
+
+        public ISprintState GetState()
+        {
+            return this.sprintState;
+        }
+
+        public void SetSprintState(ISprintState state)
+        {
+            this.sprintState = state;
         }
     }
 }
