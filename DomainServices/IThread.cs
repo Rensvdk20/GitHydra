@@ -5,7 +5,5 @@
         public void AddMessage(IMessage message);
 
         public void CloseThread();
-
-        public void LockThread();
     }
 }
