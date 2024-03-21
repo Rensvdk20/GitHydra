@@ -6,11 +6,11 @@ namespace Domain
     {
         private IEnumerable<BacklogItem> backlogItems;
 
-        public void CompleteSprint()
+        public void SprintInProgress()
         {
             foreach (var backlogItem in backlogItems)
             {
-                backlogItem.CompleteSprint();
+                backlogItem.SprintInProgress();
             }
         }
     }
