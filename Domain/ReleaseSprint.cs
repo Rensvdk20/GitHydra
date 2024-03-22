@@ -1,6 +1,5 @@
 ﻿using Domain.Employees;
 using Domain.SprintState;
-using DomainServices;
 
 namespace Domain
 {
@@ -30,6 +29,11 @@ namespace Domain
         public override string ToString()
         {
             return this.name;
+        }
+
+        public SprintBacklog getBacklog()
+        {
+            return this.sprintBacklog;
         }
 
         public void Export()

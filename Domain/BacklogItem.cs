@@ -1,5 +1,4 @@
 ﻿using Domain.Employees;
-using DomainServices;
 
 namespace Domain
 {
@@ -10,8 +9,9 @@ namespace Domain
         private Developer developer;
         private bool backlogItemLocked = false;
         private IBacklogItemState _currentState;
+        private SprintBacklog sprintBacklog;
 
-        public BacklogItem(Developer developer)
+        public BacklogItem(Developer developer, SprintBacklog sprintBacklog)
         {
             // Parameters
             this.developer = developer;
@@ -20,6 +20,7 @@ namespace Domain
             this._activities = new List<Activity>();
             this._threads = new List<IThread>();
             this._currentState = new BacklogItemState.BacklogItemTodo(this);
+            this.sprintBacklog = sprintBacklog;
         }
 
         public void SetState(IBacklogItemState state)
@@ -59,6 +60,11 @@ namespace Domain
             {
                 activity.LockActivity();
             }
+        }
+
+        public void test()
+        {
+            sprintBacklog.GetSprint().GetState();
         }
     }
 }
