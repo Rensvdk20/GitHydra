@@ -1,4 +1,4 @@
-﻿namespace DomainServices
+﻿namespace Domain
 {
     public interface IBacklogItemState
     {

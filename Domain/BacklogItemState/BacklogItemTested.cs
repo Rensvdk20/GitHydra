@@ -1,6 +1,4 @@
-﻿using DomainServices;
-
-namespace Domain.BacklogItemState
+﻿namespace Domain.BacklogItemState
 {
     public class BacklogItemTested : IBacklogItemState
     {

@@ -1,5 +1,5 @@
-﻿using Domain.SprintState;
-using DomainServices;
+﻿using Domain;
+using Domain.SprintState;
 using Moq;
 
 namespace GitHydra.Tests.SprintStateTests
