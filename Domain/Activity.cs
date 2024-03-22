@@ -15,6 +15,11 @@ namespace Domain
         public void LockActivity() {
             activityLocked = true;
         }
+        
+        public bool GetActivityLocked()
+        {
+            return this.activityLocked;
+        }
 
         public void SetDeveloper(Developer developer)
         {
