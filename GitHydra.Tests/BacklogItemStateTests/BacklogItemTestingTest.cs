@@ -1,5 +1,5 @@
-﻿using Domain.BacklogItemState;
-using DomainServices;
+﻿using Domain;
+using Domain.BacklogItemState;
 using Moq;
 
 namespace GitHydra.Tests.BacklogItemStateTests

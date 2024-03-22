@@ -1,6 +1,4 @@
-﻿using DomainServices;
-
-namespace Domain.Employees
+﻿namespace Domain.Employees
 {
     public class ProductOwner : IEmployee
     {
