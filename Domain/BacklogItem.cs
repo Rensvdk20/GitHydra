@@ -80,5 +80,7 @@ namespace Domain
         {
             return backlogItemLocked;
         }
+
+        public SprintBacklog GetSprintBacklog() => this.sprintBacklog;
     }
 }
