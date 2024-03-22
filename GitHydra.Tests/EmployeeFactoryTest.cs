@@ -1,6 +1,6 @@
 using Infrastructure;
-using DomainServices;
 using Domain.Employees;
+using Domain;
 
 namespace GitHydra.Tests
 {

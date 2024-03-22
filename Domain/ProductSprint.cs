@@ -1,6 +1,5 @@
 ﻿using Domain.Employees;
 using Domain.SprintState;
-using DomainServices;
 
 namespace Domain
 {
@@ -20,6 +19,7 @@ namespace Domain
         public ProductSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy)
         {
             this.name = name;
+            this.sprintBacklog = new SprintBacklog(this);
             this.startDate = startDate;
             this.endDate = endDate;
             this.exportStrategy = exportStrategy;
@@ -65,6 +65,11 @@ namespace Domain
         public void SetSprintState(ISprintState state)
         {
             this.sprintState = state;
+        }
+
+        public SprintBacklog getBacklog()
+        {
+            throw new NotImplementedException();
         }
     }
 }
