@@ -1,7 +1,7 @@
 ﻿using Domain;
 using Domain.BacklogItemState;
 using Domain.Employees;
-using Xunit;
+using Moq;
 
 namespace GitHydra.Tests
 {
@@ -107,5 +107,35 @@ namespace GitHydra.Tests
             Assert.IsType<BacklogItemDoing>(backlogItem.GetState());
         }
 
+        [Fact]
+        public void BacklogItem_CreatedWithDeveloperAndSprintBacklog_HasCorrectDeveloperAndSprintBacklog()
+        {
+            // Arrange
+            var developer = new Developer("John", "john@example.com");
+            var sprintBacklog = new SprintBacklog(Mock.Of<ISprint>());
+
+            // Act
+            var backlogItem = new BacklogItem(developer, sprintBacklog);
+
+            // Assert
+            Assert.Equal(developer, backlogItem.GetDeveloper());
+            Assert.Equal(sprintBacklog, backlogItem.GetSprintBacklog());
+        }
+
+        [Fact]
+        public void BacklogItem_CreatedWithDeveloperAndSprintBacklog_DefaultsCorrectly()
+        {
+            // Arrange
+            var developer = new Developer("John", "john@example.com");
+            var sprintBacklog = new SprintBacklog(Mock.Of<ISprint>());
+
+            // Act
+            var backlogItem = new BacklogItem(developer, sprintBacklog);
+
+            // Assert
+            Assert.Empty(backlogItem.GetActivities());
+            Assert.Empty(backlogItem.GetAllThreads());
+            Assert.IsType<BacklogItemTodo>(backlogItem.GetState());
+        }
     }
 }
