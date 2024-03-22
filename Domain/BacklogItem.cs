@@ -51,6 +51,8 @@ namespace Domain
             }
         }
 
+        public List<Activity> GetActivities() => _activities;
+
         public void AddThread(Thread thread)
         {
             if (!backlogItemLocked)
@@ -59,10 +61,11 @@ namespace Domain
             }
         }
 
-        public void SetDeveloper(Developer developer)
-        {
-            this.developer = developer;
-        }
+        public List<IThread> GetAllThreads() => _threads;
+
+        public void SetDeveloper(Developer developer) => this.developer = developer;
+
+        public Developer GetDeveloper() => this.developer;
 
         public void SprintInProgress()
         {
@@ -73,9 +76,9 @@ namespace Domain
             }
         }
 
-        public void test()
+        public bool GetBacklogItemLocked()
         {
-            sprintBacklog.GetSprint().GetState();
+            return backlogItemLocked;
         }
     }
 }
