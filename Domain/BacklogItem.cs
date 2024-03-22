@@ -11,7 +11,7 @@ namespace Domain
         private IBacklogItemState _currentState;
         private SprintBacklog sprintBacklog;
 
-        public BacklogItem(Developer developer, SprintBacklog sprintBacklog)
+        public BacklogItem(Developer developer)
         {
             // Parameters
             this.developer = developer;
@@ -20,7 +20,18 @@ namespace Domain
             this._activities = new List<Activity>();
             this._threads = new List<IThread>();
             this._currentState = new BacklogItemState.BacklogItemTodo(this);
+        }
+
+        public BacklogItem(Developer developer, SprintBacklog sprintBacklog)
+        {
+            // Parameters
+            this.developer = developer;
             this.sprintBacklog = sprintBacklog;
+
+            // Defaults
+            this._activities = new List<Activity>();
+            this._threads = new List<IThread>();
+            this._currentState = new BacklogItemState.BacklogItemTodo(this);
         }
 
         public void SetState(IBacklogItemState state)
