@@ -14,23 +14,21 @@ namespace Domain
             this.sprint = sprint;
         }
 
-        public void AddBacklogItem(Developer developer)
+        public BacklogItem AddBacklogItem(string name, Developer developer)
         {
-
-            backlogItems.Add(new BacklogItem(developer, this));
-        }
-
-        public void SprintInProgress()
-        {
-            foreach (var backlogItem in backlogItems)
-            {
-                backlogItem.SprintInProgress();
-            }
+            BacklogItem backlogItem = new BacklogItem(name, developer, this);
+            backlogItems.Add(backlogItem);
+            return backlogItem;
         }
 
         public ISprint GetSprint()
         {
             return sprint;
+        }
+
+        public List<BacklogItem> GetBacklogItems()
+        {
+            return backlogItems;
         }
     }
 }
