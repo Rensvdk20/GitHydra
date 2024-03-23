@@ -12,10 +12,10 @@ namespace Domain
             this.backlogItems = new List<BacklogItem>();
         }
 
-        public void AddBacklogItem(Developer developer)
+        public void AddBacklogItem(string name, Developer developer)
         {
 
-            backlogItems.Add(new BacklogItem(developer));
+            backlogItems.Add(new BacklogItem(name, developer));
         }
     }
 }

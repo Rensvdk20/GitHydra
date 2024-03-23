@@ -21,6 +21,7 @@ namespace Domain
             this.name = name;
             this.startDate = startDate;
             this.endDate = endDate;
+            this.sprintBacklog = new SprintBacklog(this);
             this.exportStrategy = exportStrategy;
             this.scrumMaster = scrumMaster;
             this.sprintState = new SprintCreated(this);
@@ -31,7 +32,7 @@ namespace Domain
             return this.name;
         }
 
-        public SprintBacklog getBacklog()
+        public SprintBacklog GetSprintBacklog()
         {
             return this.sprintBacklog;
         }
@@ -69,11 +70,6 @@ namespace Domain
         public void SetSprintState(ISprintState state)
         {
             this.sprintState = state;
-        }
-
-        public void SprintInProgress()
-        {
-            sprintBacklog.SprintInProgress();
         }
     }
 }

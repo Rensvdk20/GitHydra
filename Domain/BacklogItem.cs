@@ -4,14 +4,15 @@ namespace Domain
 {
     public class BacklogItem :  IBacklogItemContext
     {
+        private string name;
+
         private List<Activity> _activities;
         private List<IThread> _threads;
         private Developer developer;
-        private bool backlogItemLocked = false;
         private IBacklogItemState _currentState;
         private SprintBacklog sprintBacklog;
 
-        public BacklogItem(Developer developer)
+        public BacklogItem(string name, Developer developer)
         {
             // Parameters
             this.developer = developer;
@@ -22,9 +23,10 @@ namespace Domain
             this._currentState = new BacklogItemState.BacklogItemTodo(this);
         }
 
-        public BacklogItem(Developer developer, SprintBacklog sprintBacklog)
+        public BacklogItem(string name, Developer developer, SprintBacklog sprintBacklog)
         {
             // Parameters
+            this.name = name;
             this.developer = developer;
             this.sprintBacklog = sprintBacklog;
 
@@ -43,42 +45,47 @@ namespace Domain
 
         public void MoveToDoing() => this._currentState!.MoveToDoing();
 
-        public void AddActivity(Activity activity)
+        public void AddActivity(string name, Developer developer)
         {
-            if (!backlogItemLocked)
+            if (!IsChangeable())
             {
-                _activities.Add(activity);
+                Console.WriteLine("Can't add activities, because the sprint has already started/finished");
+                return;
             }
+
+            _activities.Add(new Activity(name, developer, this));
         }
 
-        public List<Activity> GetActivities() => _activities;
+        public SprintBacklog GetSprintBacklog()
+        {
+            return this.sprintBacklog;
+        }
 
         public void AddThread(Thread thread)
         {
-            if (!backlogItemLocked)
+            if (!IsChangeable())
             {
-                _threads.Add(thread);
+                Console.WriteLine("Can't add threads, because the sprint has already started/finished");
+                return;
             }
+
+            _threads.Add(thread);
         }
 
-        public List<IThread> GetAllThreads() => _threads;
-
-        public void SetDeveloper(Developer developer) => this.developer = developer;
-
-        public Developer GetDeveloper() => this.developer;
-
-        public void SprintInProgress()
+        public void SetDeveloper(Developer developer)
         {
-            backlogItemLocked = true;
-            foreach (var activity in this._activities)
+            if (!IsChangeable())
             {
-                activity.LockActivity();
+                Console.WriteLine("Can't change the developer, because the sprint has already started");
+                return;
             }
+
+            this.developer = developer;
         }
 
-        public bool GetBacklogItemLocked()
+        public bool IsChangeable()
         {
-            return backlogItemLocked;
+            return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated");
         }
 
         public SprintBacklog GetSprintBacklog() => this.sprintBacklog;
