@@ -7,6 +7,17 @@ namespace GitHydra.Tests.BacklogItemStateTests
     public class BacklogItemTodoTest
     {
         [Fact]
+        public void MoveToTodo_ThrowsException()
+        {
+            // Arrange
+            var backlogItemContextMock = new Mock<IBacklogItemContext>();
+            var doingState = new BacklogItemDoing(backlogItemContextMock.Object);
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => doingState.MoveToTodo());
+        }
+
+        [Fact]
         public void MoveToDoing_SuccessfullyMovesToDoing()
         {
             // Arrange

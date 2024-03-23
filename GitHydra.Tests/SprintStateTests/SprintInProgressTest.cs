@@ -36,5 +36,16 @@ namespace GitHydra.Tests.SprintStateTests
 
             sprintContextMock.Verify(x => x.SetSprintState(It.IsAny<SprintFinished>()));
         }
+
+        [Fact]
+        public void Change_ThrowsException()
+        {
+            // Arrange
+            var sprintContextMock = new Mock<ISprintContext>();
+            var inProgressState = new SprintInProgress(sprintContextMock.Object);
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => inProgressState.Change("New Name", DateTime.Now, DateTime.Now.AddDays(7)));
+        }
     }
 }
