@@ -14,11 +14,6 @@ namespace Domain
             this.developer = developer;
             this.backlogItem = backlogItem;
         }
-        
-        public bool GetActivityLocked()
-        {
-            return this.activityLocked;
-        }
 
         public void SetDeveloper(Developer developer)
         {
@@ -36,6 +31,11 @@ namespace Domain
         public bool IsChangeable()
         {
             return backlogItem.IsChangeable();
+        }
+
+        public String GetName()
+        {
+            return name;
         }
     }
 }

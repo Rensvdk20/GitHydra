@@ -56,6 +56,11 @@ namespace Domain
             _activities.Add(new Activity(name, developer, this));
         }
 
+        public List<Activity> GetActivities()
+        {
+            return _activities;
+        }
+
         public SprintBacklog GetSprintBacklog()
         {
             return this.sprintBacklog;
@@ -72,6 +77,11 @@ namespace Domain
             _threads.Add(thread);
         }
 
+        public List<IThread> GetAllThreads()
+        {
+            return _threads;
+        }
+
         public void SetDeveloper(Developer developer)
         {
             if (!IsChangeable())
@@ -83,11 +93,14 @@ namespace Domain
             this.developer = developer;
         }
 
-        public bool IsChangeable()
+        public Developer GetDeveloper()
+        {
+            return this.developer;
+        }
+
+        public virtual bool IsChangeable()
         {
             return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated");
         }
-
-        public SprintBacklog GetSprintBacklog() => this.sprintBacklog;
     }
 }
