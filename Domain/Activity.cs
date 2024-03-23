@@ -4,16 +4,15 @@ namespace Domain
 {
     public class Activity
     {
+        private string name;
         private Developer developer;
-        private bool activityLocked = false;
+        private BacklogItem backlogItem;
 
-        public Activity(Developer developer)
+        public Activity(string name, Developer developer, BacklogItem backlogItem)
         {
+            this.name = name;
             this.developer = developer;
-        }
-
-        public void LockActivity() {
-            activityLocked = true;
+            this.backlogItem = backlogItem;
         }
         
         public bool GetActivityLocked()
@@ -23,7 +22,7 @@ namespace Domain
 
         public void SetDeveloper(Developer developer)
         {
-            if (!activityLocked)
+            if (IsChangeable())
             {
                 this.developer = developer;
             }
@@ -32,6 +31,11 @@ namespace Domain
         public Developer GetDeveloper()
         {
             return this.developer;
+        }
+      
+        public bool IsChangeable()
+        {
+            return backlogItem.IsChangeable();
         }
     }
 }

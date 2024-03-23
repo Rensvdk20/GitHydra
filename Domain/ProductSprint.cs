@@ -19,9 +19,9 @@ namespace Domain
         public ProductSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy)
         {
             this.name = name;
-            this.sprintBacklog = new SprintBacklog(this);
             this.startDate = startDate;
             this.endDate = endDate;
+            this.sprintBacklog = new SprintBacklog(this);
             this.exportStrategy = exportStrategy;
             this.scrumMaster = scrumMaster;
             this.sprintState = new SprintCreated(this);
@@ -40,6 +40,11 @@ namespace Domain
         public void Change(string name, DateTime? startDate, DateTime? endDate)
         {
             sprintState.Change(name, startDate, endDate);
+        }
+
+        public SprintBacklog GetSprintBacklog()
+        {
+            return this.sprintBacklog;
         }
 
         public void SetName(string name)
@@ -65,11 +70,6 @@ namespace Domain
         public void SetSprintState(ISprintState state)
         {
             this.sprintState = state;
-        }
-
-        public SprintBacklog getBacklog()
-        {
-            throw new NotImplementedException();
         }
     }
 }
