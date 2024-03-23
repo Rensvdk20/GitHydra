@@ -12,15 +12,17 @@ namespace Portal
             EmployeeFactory factory = new EmployeeFactory();
             //IEmployee testdeveloper = factory.CreateEmployee("Hans", "hans@mail.com","Developer");
             //IEmployee testproductowner = factory.CreateEmployee("Gerard","gerard@mail.com","ProductOwner");
-            IEmployee testscrummaster = factory.CreateEmployee("Peter", "peter@mail.com", "ScrumMaster");
+            ScrumMaster testscrummaster = (ScrumMaster) factory.CreateEmployee("Peter", "peter@mail.com", "ScrumMaster");
+            Developer testdeveloper = (Developer) factory.CreateEmployee("Hans", "hans@gmail.com", "Developer");
 
             //Console.WriteLine(testdeveloper);
             //Console.WriteLine(testproductowner);
 
-            var sprint = new ReleaseSprint("test", DateTime.Now, DateTime.Now, (ScrumMaster)testscrummaster, new ExportPDF());
+            var sprint = new ReleaseSprint("test", DateTime.Now, DateTime.Now, testscrummaster, new ExportPDF());
             //sprint.Export();
 
-            //sprint.get
+            sprint.getSprintBacklog().AddBacklogItem("Login", testdeveloper);
+            //Console.WriteLine(sprint.getSprintBacklog().GetBacklogItems()[0].GetState());
         }
     }
 }

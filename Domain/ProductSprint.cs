@@ -71,5 +71,10 @@ namespace Domain
         {
             throw new NotImplementedException();
         }
+
+        public SprintBacklog getSprintBacklog()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

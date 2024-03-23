@@ -4,6 +4,8 @@ namespace Domain
 {
     public class BacklogItem :  IBacklogItemContext
     {
+        private string name;
+
         private List<Activity> _activities;
         private List<IThread> _threads;
         private Developer developer;
@@ -11,9 +13,10 @@ namespace Domain
         private IBacklogItemState _currentState;
         private SprintBacklog sprintBacklog;
 
-        public BacklogItem(Developer developer, SprintBacklog sprintBacklog)
+        public BacklogItem(string name, Developer developer, SprintBacklog sprintBacklog)
         {
             // Parameters
+            this.name = name;
             this.developer = developer;
 
             // Defaults
@@ -32,12 +35,17 @@ namespace Domain
 
         public void MoveToDoing() => this._currentState!.MoveToDoing();
 
-        public void AddActivity(Activity activity)
+        public void AddActivity(string name, Developer developer)
         {
-            if (!backlogItemLocked)
+            if (sprintBacklog.GetSprint().GetState().GetType().Name.Equals("ReleaseSprintCreated"))
             {
-                _activities.Add(activity);
+                _activities.Add(new Activity(name, developer, this));
             }
+        }
+
+        public SprintBacklog GetSprintBacklog()
+        {
+            return this.sprintBacklog;
         }
 
         public void AddThread(Thread thread)
@@ -51,20 +59,6 @@ namespace Domain
         public void SetDeveloper(Developer developer)
         {
             this.developer = developer;
-        }
-
-        public void SprintInProgress()
-        {
-            backlogItemLocked = true;
-            foreach (var activity in this._activities)
-            {
-                activity.LockActivity();
-            }
-        }
-
-        public void test()
-        {
-            sprintBacklog.GetSprint().GetState();
         }
     }
 }

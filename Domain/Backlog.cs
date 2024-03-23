@@ -1,4 +1,6 @@
-﻿namespace Domain
+﻿using Domain.Employees;
+
+namespace Domain
 {
     public class Backlog
     {

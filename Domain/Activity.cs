@@ -4,24 +4,29 @@ namespace Domain
 {
     public class Activity
     {
+        private string name;
         private Developer developer;
-        private bool activityLocked = false;
+        private BacklogItem backlogItem;
 
-        public Activity(Developer developer)
+        public Activity(string name, Developer developer, BacklogItem backlogItem)
         {
+            this.name = name;
             this.developer = developer;
+            this.backlogItem = backlogItem;
         }
 
-        public void LockActivity() {
-            activityLocked = true;
-        }
 
         public void SetDeveloper(Developer developer)
         {
-            if (!activityLocked)
+            if (IsChangeable())
             {
                 this.developer = developer;
             }
+        }
+
+        public bool IsChangeable()
+        {
+            return backlogItem.GetSprintBacklog().GetSprint().GetState().GetType().Name.Equals("ReleaseSprintCreated");
         }
     }
 }
