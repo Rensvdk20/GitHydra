@@ -36,5 +36,21 @@ namespace GitHydra.Tests.SprintStateTests
 
             Assert.Throws<InvalidOperationException>(() => createState.FinishSprint());
         }
+
+        [Fact]
+        public void Change_CallsCorrectMethods()
+        {
+            // Arrange
+            var sprintContextMock = new Mock<ISprintContext>();
+            var createState = new SprintCreated(sprintContextMock.Object);
+
+            // Act
+            createState.Change("New Name", DateTime.Now, DateTime.Now.AddDays(7));
+
+            // Assert
+            sprintContextMock.Verify(x => x.SetName("New Name"), Times.Once);
+            sprintContextMock.Verify(x => x.SetStartDate(It.IsAny<DateTime>()), Times.Once);
+            sprintContextMock.Verify(x => x.SetEndDate(It.IsAny<DateTime>()), Times.Once);
+        }
     }
 }
