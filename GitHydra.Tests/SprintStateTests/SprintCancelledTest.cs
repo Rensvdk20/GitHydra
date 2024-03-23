@@ -32,5 +32,16 @@ namespace GitHydra.Tests.SprintStateTests
 
             Assert.Throws<InvalidOperationException>(() => cancelledState.FinishSprint());
         }
+
+        [Fact]
+        public void Change_ThrowsException()
+        {
+            // Arrange
+            var sprintContextMock = new Mock<ISprintContext>();
+            var cancelledState = new SprintCancelled(sprintContextMock.Object);
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => cancelledState.Change("New Name", DateTime.Now, DateTime.Now.AddDays(7)));
+        }
     }
 }
