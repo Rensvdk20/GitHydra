@@ -17,7 +17,8 @@ namespace Domain
         private ISprintState sprintState;
         private IEnumerable<Developer> developers;
         private ScrumMaster scrumMaster;
-        private Observable observable;
+        private SprintObservable _sprintObservable;
+        private Project? project;
 
         public ProductSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy)
         {
@@ -28,7 +29,8 @@ namespace Domain
             this.exportStrategy = exportStrategy;
             this.scrumMaster = scrumMaster;
             this.sprintState = new SprintCreated(this);
-            this.observable = new Observable(this);
+            this._sprintObservable = new SprintObservable(this);
+            this.project = null;
         }
 
         public override string ToString()
@@ -53,7 +55,7 @@ namespace Domain
 
         public void Subscribe(ISubscriber subscriber)
         {
-            this.observable.Subscribe(subscriber);
+            this._sprintObservable.Subscribe(subscriber);
         }
 
         public ScrumMaster GetScrumMaster()
@@ -87,7 +89,17 @@ namespace Domain
         }
         public void NotifySubscribers(string message, string employee)
         {
-            this.observable.NotifySubscribers(message, employee);
+            this._sprintObservable.NotifySubscribers(message, employee);
+        }
+
+        public void SetProject(Project project)
+        {
+            this.project = project;
+        }
+
+        public Project GetProject()
+        {
+            return this.project ?? throw new InvalidOperationException("This sprint is not attached to a project");
         }
     }
 }

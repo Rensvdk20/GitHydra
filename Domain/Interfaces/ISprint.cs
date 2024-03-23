@@ -14,5 +14,7 @@ namespace Domain
         ScrumMaster GetScrumMaster();
 
         void NotifySubscribers(string message, string employee);
+        void SetProject(Project project);
+        Project GetProject();
     }
 }

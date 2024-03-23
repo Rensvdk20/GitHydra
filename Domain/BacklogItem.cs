@@ -1,4 +1,5 @@
 ﻿using Domain.Employees;
+using Domain.Observer;
 
 namespace Domain
 {
@@ -34,6 +35,11 @@ namespace Domain
             this._activities = new List<Activity>();
             this._threads = new List<IThread>();
             this._currentState = new BacklogItemState.BacklogItemTodo(this);
+        }
+
+        public string GetName()
+        {
+            return this.name;
         }
 
         public void SetState(IBacklogItemState state)
@@ -90,6 +96,8 @@ namespace Domain
                 return;
             }
 
+            //Send message to scrum master
+            this.GetSprintBacklog().GetSprint().NotifySubscribers($"Developer {this.developer} has been replaced by {developer} in backlog item: {this.name}", "scrum master");
             this.developer = developer;
         }
 
@@ -101,6 +109,11 @@ namespace Domain
         public virtual bool IsChangeable()
         {
             return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated");
+        }
+
+        public override string ToString()
+        {
+            return this.name;
         }
     }
 }
