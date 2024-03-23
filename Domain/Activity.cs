@@ -28,6 +28,11 @@ namespace Domain
             }
         }
 
+        public Developer GetDeveloper()
+        {
+            return this.developer;
+        }
+      
         public bool IsChangeable()
         {
             return backlogItem.IsChangeable();

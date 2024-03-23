@@ -17,9 +17,19 @@
             messages.Add(message);
         }
 
+        public List<IMessage> GetAllMessages()
+        {
+            return messages;
+        }
+
         public void CloseThread()
         {
             this.status = false;
+        }
+
+        public bool GetStatus()
+        {
+            return status;
         }
     }
 }
