@@ -28,5 +28,10 @@ namespace Domain
                 this.developer = developer;
             }
         }
+
+        public Developer GetDeveloper()
+        {
+            return this.developer;
+        }
     }
 }

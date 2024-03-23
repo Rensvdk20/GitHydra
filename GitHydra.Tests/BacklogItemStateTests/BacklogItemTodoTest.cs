@@ -11,10 +11,10 @@ namespace GitHydra.Tests.BacklogItemStateTests
         {
             // Arrange
             var backlogItemContextMock = new Mock<IBacklogItemContext>();
-            var doingState = new BacklogItemDoing(backlogItemContextMock.Object);
+            var todoState = new BacklogItemTodo(backlogItemContextMock.Object);
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => doingState.MoveToTodo());
+            Assert.Throws<InvalidOperationException>(() => todoState.MoveToTodo());
         }
 
         [Fact]
