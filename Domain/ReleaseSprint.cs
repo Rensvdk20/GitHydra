@@ -32,7 +32,7 @@ namespace Domain
             return this.name;
         }
 
-        public SprintBacklog getSprintBacklog()
+        public SprintBacklog GetSprintBacklog()
         {
             return this.sprintBacklog;
         }
@@ -70,11 +70,6 @@ namespace Domain
         public void SetSprintState(ISprintState state)
         {
             this.sprintState = state;
-        }
-
-        public void SprintInProgress()
-        {
-            sprintBacklog.SprintInProgress();
         }
     }
 }

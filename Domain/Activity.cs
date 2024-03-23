@@ -15,7 +15,6 @@ namespace Domain
             this.backlogItem = backlogItem;
         }
 
-
         public void SetDeveloper(Developer developer)
         {
             if (IsChangeable())
@@ -26,7 +25,7 @@ namespace Domain
 
         public bool IsChangeable()
         {
-            return backlogItem.GetSprintBacklog().GetSprint().GetState().GetType().Name.Equals("ReleaseSprintCreated");
+            return backlogItem.IsChangeable();
         }
     }
 }

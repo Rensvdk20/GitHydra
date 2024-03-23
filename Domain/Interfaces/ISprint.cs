@@ -5,6 +5,6 @@
         String ToString();
         void Export();
         void Change(string name, DateTime? startDate, DateTime? endDate);
-        SprintBacklog getSprintBacklog();
+        SprintBacklog GetSprintBacklog();
     }
 }

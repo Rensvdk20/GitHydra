@@ -6,10 +6,10 @@
         private bool status;
         private List<IMessage> messages = new();
 
-        public Thread(String topic, bool status)
+        public Thread(String topic)
         {
             this.topic = topic;
-            this.status = status;
+            this.status = true;
         }
 
         public void AddMessage(IMessage message)

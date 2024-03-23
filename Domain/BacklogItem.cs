@@ -9,11 +9,10 @@ namespace Domain
         private List<Activity> _activities;
         private List<IThread> _threads;
         private Developer developer;
-        private bool backlogItemLocked = false;
         private IBacklogItemState _currentState;
         private SprintBacklog sprintBacklog;
 
-        public BacklogItem(Developer developer)
+        public BacklogItem(string name, Developer developer)
         {
             // Parameters
             this.developer = developer;
@@ -24,7 +23,7 @@ namespace Domain
             this._currentState = new BacklogItemState.BacklogItemTodo(this);
         }
 
-        public BacklogItem(Developer developer, SprintBacklog sprintBacklog)
+        public BacklogItem(string name, Developer developer, SprintBacklog sprintBacklog)
         {
             // Parameters
             this.name = name;
@@ -48,10 +47,13 @@ namespace Domain
 
         public void AddActivity(string name, Developer developer)
         {
-            if (sprintBacklog.GetSprint().GetState().GetType().Name.Equals("ReleaseSprintCreated"))
+            if (!IsChangeable())
             {
-                _activities.Add(new Activity(name, developer, this));
+                Console.WriteLine("Can't add activities, because the sprint has already started/finished");
+                return;
             }
+
+            _activities.Add(new Activity(name, developer, this));
         }
 
         public SprintBacklog GetSprintBacklog()
@@ -61,15 +63,29 @@ namespace Domain
 
         public void AddThread(Thread thread)
         {
-            if (!backlogItemLocked)
+            if (!IsChangeable())
             {
-                _threads.Add(thread);
+                Console.WriteLine("Can't add threads, because the sprint has already started/finished");
+                return;
             }
+
+            _threads.Add(thread);
         }
 
         public void SetDeveloper(Developer developer)
         {
+            if (!IsChangeable())
+            {
+                Console.WriteLine("Can't change the developer, because the sprint has already started");
+                return;
+            }
+
             this.developer = developer;
+        }
+
+        public bool IsChangeable()
+        {
+            return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated");
         }
     }
 }
