@@ -4,6 +4,18 @@ namespace Domain
 {
     public class Backlog
     {
-        private List<BacklogItem> backlogItems = new List<BacklogItem>();
+        private List<BacklogItem> backlogItems;
+
+        public Backlog()
+        {
+
+            this.backlogItems = new List<BacklogItem>();
+        }
+
+        public void AddBacklogItem(Developer developer)
+        {
+
+            backlogItems.Add(new BacklogItem(developer));
+        }
     }
 }
