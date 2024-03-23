@@ -1,10 +1,18 @@
-﻿namespace Domain
+﻿using Domain.Employees;
+using Domain.Interfaces;
+
+namespace Domain
 {
     public interface ISprint : ISprintContext
     {
-        String ToString();
+        string ToString();
         void Export();
         void Change(string name, DateTime? startDate, DateTime? endDate);
         SprintBacklog GetSprintBacklog();
+
+        void Subscribe(ISubscriber subscriber);
+        ScrumMaster GetScrumMaster();
+
+        void NotifySubscribers(string message, string employee);
     }
 }

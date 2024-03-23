@@ -2,13 +2,18 @@
 {
     public class ProductOwner : IEmployee
     {
-        public String name { get; }
-        public String email { get; }
+        public string name { get; }
+        public string email { get; }
 
-        public ProductOwner(String name, String email)
+        public ProductOwner(string name, string email)
         {
             this.name = name;
             this.email = email;
+        }
+
+        public override string ToString()
+        {
+            return this.name;
         }
     }
 }

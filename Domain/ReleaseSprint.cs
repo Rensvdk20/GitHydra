@@ -1,4 +1,6 @@
 ﻿using Domain.Employees;
+using Domain.Interfaces;
+using Domain.Observer;
 using Domain.SprintState;
 
 namespace Domain
@@ -15,6 +17,7 @@ namespace Domain
         private ISprintState sprintState;
         private IEnumerable<Developer> developers;
         private ScrumMaster scrumMaster;
+        private Observable observable;
 
         public ReleaseSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy)
         {
@@ -25,6 +28,7 @@ namespace Domain
             this.exportStrategy = exportStrategy;
             this.scrumMaster = scrumMaster;
             this.sprintState = new SprintCreated(this);
+            this.observable = new Observable(this);
         }
 
         public override string ToString()
@@ -70,6 +74,21 @@ namespace Domain
         public void SetSprintState(ISprintState state)
         {
             this.sprintState = state;
+        }
+
+        public void Subscribe(ISubscriber subscriber)
+        {
+            this.observable.Subscribe(subscriber);
+        }
+
+        public ScrumMaster GetScrumMaster()
+        {
+            return this.scrumMaster;
+        }
+
+        public void NotifySubscribers(string message, string employee)
+        {
+            this.observable.NotifySubscribers(message, employee);
         }
     }
 }

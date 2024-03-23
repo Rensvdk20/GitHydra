@@ -2,7 +2,9 @@
 {
     public interface IEmployee
     {
-        String name { get; }
-        String email { get; }
+        string name { get; }
+        string email { get; }
+
+        string ToString();
     }
 }
