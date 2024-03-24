@@ -27,11 +27,6 @@ namespace Domain
             this._currentState = new BacklogItemState.BacklogItemTodo(this);
         }
 
-        public string GetName()
-        {
-            return this.name;
-        }
-
         public void SetState(IBacklogItemState state)
         {
             this._currentState = state;
