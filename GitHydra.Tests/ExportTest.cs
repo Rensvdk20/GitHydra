@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GitHydra.Tests
 {
-    public class SprintTest
+    public class ExportTest
     {
         [Fact]
         public void Export_Sprint_To_PDF()
@@ -19,8 +19,7 @@ namespace GitHydra.Tests
 
             var exportMethod = new ExportPDF();
             var devOpsPipelineService = new DevOpsPipelineService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
-            var devOpsGitService = new DevOpsGitService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
-            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod, devOpsPipelineService, devOpsGitService);
+            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod, devOpsPipelineService);
 
             // Act
             sprint.Export();
@@ -40,8 +39,7 @@ namespace GitHydra.Tests
 
             var exportMethod = new ExportPNG();
             var devOpsPipelineService = new DevOpsPipelineService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
-            var devOpsGitService = new DevOpsGitService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
-            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod, devOpsPipelineService, devOpsGitService);
+            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod, devOpsPipelineService);
 
             // Act
             sprint.Export();

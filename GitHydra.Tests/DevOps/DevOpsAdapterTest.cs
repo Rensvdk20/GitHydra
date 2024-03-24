@@ -1,7 +1,7 @@
 ﻿using Infrastructure.DevOps;
 using Moq;
 
-namespace GitHydra.Tests
+namespace GitHydra.Tests.DevOps
 {
     public class DevOpsAdapterTest
     {
