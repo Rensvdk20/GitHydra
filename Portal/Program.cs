@@ -1,5 +1,6 @@
 using Domain.Employees;
 using Domain;
+using Domain.BacklogItemState;
 using Domain.SprintState;
 using Infrastructure;
 using Infrastructure.ExportBehaviour;
@@ -46,8 +47,16 @@ namespace Portal
             project.AddTester(new Tester("tester1", "tester1@gmail.com"));
             project.AddTester(new Tester("tester2", "tester2@gmail.com"));
 
-            backlogitem.GetState().MoveToDoing();
-            backlogitem.GetState().MoveToReadyForTesting();
+            //backlogitem.GetState().MoveToDoing();
+            //backlogitem.GetState().MoveToReadyForTesting();
+
+            backlogitem.AddActivity("test", new Developer("Max", "max@gmail.com"));
+            backlogitem.SetState(new BacklogItemDoing(backlogitem));
+            backlogitem.SetState(new BacklogItemReadyForTesting(backlogitem));
+            backlogitem.SetState(new BacklogItemReadyForTesting(backlogitem));
+            backlogitem.SetState(new BacklogItemTested(backlogitem));
+            backlogitem.GetActivities()[0].SetDone(true);
+            backlogitem.SetState(new BacklogItemDone(backlogitem));
         }
     }
 }

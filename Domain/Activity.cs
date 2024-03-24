@@ -7,6 +7,7 @@ namespace Domain
         private string name;
         private Developer developer;
         private BacklogItem backlogItem;
+        private bool isDone = false;
 
         public Activity(string name, Developer developer, BacklogItem backlogItem)
         {
@@ -21,6 +22,19 @@ namespace Domain
             {
                 this.developer = developer;
             }
+        }
+
+        public void SetDone(bool isDone)
+        {
+            if (IsChangeable())
+            {
+                this.isDone = isDone;
+            }
+        }
+
+        public bool GetDone()
+        {
+            return this.isDone;
         }
 
         public Developer GetDeveloper()
