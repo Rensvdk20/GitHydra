@@ -1,4 +1,5 @@
-﻿using Domain.Employees;
+using Domain.BacklogItemState;
+using Domain.Employees;
 using Domain.Observer;
 
 namespace Domain
@@ -99,7 +100,7 @@ namespace Domain
         {
             if (sprintBacklog.GetSprint != null)
             {
-                return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated");
+                return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated") || !(_currentState is BacklogItemDone);
             }
 
             return true;
