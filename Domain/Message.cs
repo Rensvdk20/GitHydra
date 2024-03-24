@@ -17,5 +17,10 @@
         {
             messages.Add(message);
         }
+
+        public List<IMessage> GetAllMessages()
+        {
+            return this.messages;
+        }
     }
 }
