@@ -4,6 +4,9 @@
     {
         IBacklogItemState GetState();
         void SetState(IBacklogItemState state);
+        SprintBacklog GetSprintBacklog();
+        string ToString();
+        List<Activity> GetActivities();
 
     }
 }

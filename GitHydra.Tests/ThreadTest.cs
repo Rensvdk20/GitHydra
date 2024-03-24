@@ -9,7 +9,7 @@ namespace GitHydra.Tests
         public void AddMessage_MessageAddedSuccessfully()
         {
             // Arrange
-            var thread = new Domain.Thread("Discussion thread", true);
+            var thread = new Domain.Thread("Discussion thread");
             var author = new Developer("John", "john@example.com");
             var message = new Message(author, "Hello, world!");
 
@@ -24,7 +24,7 @@ namespace GitHydra.Tests
         public void CloseThread_ThreadClosedSuccessfully()
         {
             // Arrange
-            var thread = new Domain.Thread("Discussion thread", true);
+            var thread = new Domain.Thread("Discussion thread");
 
             // Act
             thread.CloseThread();

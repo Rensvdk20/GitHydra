@@ -1,31 +1,26 @@
 ﻿using Domain;
 using Domain.Employees;
+using Moq;
 
 namespace GitHydra.Tests
 {
     public class ActivityTest
     {
         [Fact]
-        public void LockActivity_ActivityLocked()
+        public void SetDeveloper_DeveloperChangedSuccessfully()
         {
             // Arrange
-            var developer = new Developer("Alice", "alice@example.com");
-            var activity = new Activity(developer);
+            var developer = new Developer("John", "john@example.com");
+            var newDeveloper = new Developer("Alice", "alice@example.com");
 
-            // Act
-            activity.LockActivity();
+            // Mock de BacklogItem met de juiste parameters voor de constructor
+            var backlogItemMock = new Mock<BacklogItem>("Task", developer);
 
-            // Assert
-            Assert.True(activity.GetActivityLocked());
-        }
+            // Geef aan Moq door hoe de constructor moet worden aangeroepen
+            backlogItemMock.Setup(b => b.IsChangeable()).Returns(true);
 
-        [Fact]
-        public void SetDeveloper_ActivityNotLocked_DeveloperSetSuccessfully()
-        {
-            // Arrange
-            var developer = new Developer("Alice", "alice@example.com");
-            var activity = new Activity(developer);
-            var newDeveloper = new Developer("Bob", "bob@example.com");
+            // Creëer de activiteit met de mock van de BacklogItem
+            var activity = new Activity("Task", developer, backlogItemMock.Object);
 
             // Act
             activity.SetDeveloper(newDeveloper);
@@ -35,13 +30,20 @@ namespace GitHydra.Tests
         }
 
         [Fact]
-        public void SetDeveloper_ActivityLocked_DeveloperNotSet()
+        public void SetDeveloper_DeveloperNotChangedIfBacklogItemNotChangeable()
         {
             // Arrange
-            var developer = new Developer("Alice", "alice@example.com");
-            var activity = new Activity(developer);
-            var newDeveloper = new Developer("Bob", "bob@example.com");
-            activity.LockActivity(); // Lock the activity
+            var developer = new Developer("John", "john@example.com");
+            var newDeveloper = new Developer("Alice", "alice@example.com");
+
+            // Mock de BacklogItem met de juiste parameters voor de constructor
+            var backlogItemMock = new Mock<BacklogItem>("Task", developer);
+
+            // Geef aan Moq door hoe de constructor moet worden aangeroepen
+            backlogItemMock.Setup(b => b.IsChangeable()).Returns(false);
+
+            // Creëer de activiteit met de mock van de BacklogItem
+            var activity = new Activity("Task", developer, backlogItemMock.Object);
 
             // Act
             activity.SetDeveloper(newDeveloper);

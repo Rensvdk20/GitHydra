@@ -13,6 +13,8 @@ namespace Domain.SprintState
         public SprintFinished(ISprintContext sprint)
         {
             _sprint = sprint;
+            _sprint.NotifySubscribers($"Sprint {sprint} is finished", "product owner");
+            _sprint.NotifySubscribers($"Sprint {sprint} is finished", "scrum master");
         }
 
         public void StartSprint()

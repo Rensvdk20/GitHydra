@@ -31,5 +31,10 @@
         {
             return status;
         }
+
+        public String GetTopic()
+        {
+            return topic;
+        }
     }
 }

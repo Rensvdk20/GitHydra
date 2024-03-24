@@ -2,13 +2,15 @@
 
 namespace Infrastructure.DevOps
 {
-    public class DevOpsAdapter : IAvansDevOps
+    public class DevOpsAdapter : IDevOpsService
     {
         private readonly DevOpsPipeline _pipeline;
+        private readonly DevOpsGit _git;
 
-        public DevOpsAdapter(DevOpsPipeline pipeline)
+        public DevOpsAdapter(DevOpsPipeline pipeline, DevOpsGit git)
         {
             _pipeline = pipeline;
+            _git = git;
         }
 
         public void GetSource() => _pipeline.Source();
@@ -17,5 +19,12 @@ namespace Infrastructure.DevOps
         public void GetAnalysis() => _pipeline.Analyse();
         public void GetDeployment() => _pipeline.Deployment();
         public void GetUtility() => _pipeline.Utility();
+
+        public void Push() => _git.Push();
+        public void Pull() => _git.Pull();
+        public void Commit() => _git.Commit();
+        public void Stash() => _git.Stash();
+        public void Pop() => _git.Pop();
+        public void Checkout() => _git.Checkout();
     }
 }

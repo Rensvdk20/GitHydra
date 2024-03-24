@@ -1,4 +1,6 @@
 ﻿using Domain.Employees;
+using Domain.Interfaces;
+using Domain.Observer;
 using Domain.SprintState;
 
 namespace Domain
@@ -15,8 +17,11 @@ namespace Domain
         private ISprintState sprintState;
         private IEnumerable<Developer> developers;
         private ScrumMaster scrumMaster;
+        private SprintObservable _sprintObservable;
+        private Project? project;
+        private IDevOpsService? devOpsService;
 
-        public ProductSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy)
+        public ProductSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy, IDevOpsService? devOpsService = null)
         {
             this.name = name;
             this.startDate = startDate;
@@ -25,6 +30,9 @@ namespace Domain
             this.exportStrategy = exportStrategy;
             this.scrumMaster = scrumMaster;
             this.sprintState = new SprintCreated(this);
+            this._sprintObservable = new SprintObservable(this);
+            this.project = null;
+            this.devOpsService = devOpsService;
         }
 
         public override string ToString()
@@ -45,6 +53,16 @@ namespace Domain
         public SprintBacklog GetSprintBacklog()
         {
             return this.sprintBacklog;
+        }
+
+        public void Subscribe(ISubscriber subscriber)
+        {
+            this._sprintObservable.Subscribe(subscriber);
+        }
+
+        public ScrumMaster GetScrumMaster()
+        {
+            return this.scrumMaster;
         }
 
         public void SetName(string name)
@@ -70,6 +88,25 @@ namespace Domain
         public void SetSprintState(ISprintState state)
         {
             this.sprintState = state;
+        }
+        public void NotifySubscribers(string message, string employee)
+        {
+            this._sprintObservable.NotifySubscribers(message, employee);
+        }
+
+        public void SetProject(Project project)
+        {
+            this.project = project;
+        }
+
+        public Project GetProject()
+        {
+            return this.project ?? throw new InvalidOperationException("This sprint is not attached to a project");
+        }
+
+        public IDevOpsService? GetDevOpsService()
+        {
+            return devOpsService;
         }
     }
 }
