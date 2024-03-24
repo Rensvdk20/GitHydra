@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Domain.Employees;
+using Infrastructure.DevOps;
 using Infrastructure.ExportBehaviour;
 using System.Text;
 
@@ -17,7 +18,8 @@ namespace GitHydra.Tests
             Console.SetOut(stringWriter);
 
             var exportMethod = new ExportPDF();
-            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod);
+            var devOpsService = new DevOpsService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
+            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod, devOpsService);
 
             // Act
             sprint.Export();
@@ -36,7 +38,8 @@ namespace GitHydra.Tests
             Console.SetOut(stringWriter);
 
             var exportMethod = new ExportPNG();
-            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod);
+            var devOpsService = new DevOpsService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
+            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod, devOpsService);
 
             // Act
             sprint.Export();
