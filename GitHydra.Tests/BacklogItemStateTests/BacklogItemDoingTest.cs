@@ -6,73 +6,76 @@ namespace GitHydra.Tests.BacklogItemStateTests
 {
     public class BacklogItemDoingTest
     {
-        [Fact]
-        public void MoveToTodo_ThrowsException()
+        public class BacklogItemDoingTests
         {
-            // Arrange
-            var backlogItemContextMock = new Mock<IBacklogItemContext>();
-            var doingState = new BacklogItemDoing(backlogItemContextMock.Object);
+            [Fact]
+            public void MoveToTodo_ShouldThrowException()
+            {
+                // Arrange
+                var contextMock = new Mock<IBacklogItemContext>();
+                var backlogItemDoing = new BacklogItemDoing(contextMock.Object);
 
-            // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => doingState.MoveToTodo());
-        }
+                // Act & Assert
+                Assert.Throws<InvalidOperationException>(() => backlogItemDoing.MoveToTodo());
+            }
 
-        [Fact]
-        public void MoveToDoing_ThrowsException()
-        {
-            // Arrange
-            var backlogItemContextMock = new Mock<IBacklogItemContext>();
-            var doingState = new BacklogItemDoing(backlogItemContextMock.Object);
+            [Fact]
+            public void MoveToDoing_ShouldThrowException()
+            {
+                // Arrange
+                var contextMock = new Mock<IBacklogItemContext>();
+                var backlogItemDoing = new BacklogItemDoing(contextMock.Object);
 
-            // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => doingState.MoveToDoing());
-        }
+                // Act & Assert
+                Assert.Throws<InvalidOperationException>(() => backlogItemDoing.MoveToDoing());
+            }
 
-        [Fact]
-        public void MoveToReadyForTesting_SuccessfullyMovesToReadyForTesting()
-        {
-            // Arrange
-            var backlogItemContextMock = new Mock<IBacklogItemContext>();
-            var doingState = new BacklogItemDoing(backlogItemContextMock.Object);
+            [Fact]
+            public void MoveToReadyForTesting_ShouldSetStateToReadyForTesting()
+            {
+                // Arrange
+                var contextMock = new Mock<IBacklogItemContext>();
+                var backlogItemDoing = new BacklogItemDoing(contextMock.Object);
 
-            // Act
-            doingState.MoveToReadyForTesting();
+                // Act
+                backlogItemDoing.MoveToReadyForTesting();
 
-            // Assert
-            backlogItemContextMock.Verify(m => m.SetState(It.IsAny<IBacklogItemState>()), Times.Once);
-        }
+                // Assert
+                contextMock.Verify(c => c.SetState(It.IsAny<IBacklogItemState>()), Times.Once);
+            }
 
-        [Fact]
-        public void MoveToTesting_ThrowsException()
-        {
-            // Arrange
-            var backlogItemContextMock = new Mock<IBacklogItemContext>();
-            var doingState = new BacklogItemDoing(backlogItemContextMock.Object);
+            [Fact]
+            public void MoveToTesting_ShouldThrowException()
+            {
+                // Arrange
+                var contextMock = new Mock<IBacklogItemContext>();
+                var backlogItemDoing = new BacklogItemDoing(contextMock.Object);
 
-            // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => doingState.MoveToTesting());
-        }
+                // Act & Assert
+                Assert.Throws<InvalidOperationException>(() => backlogItemDoing.MoveToTesting());
+            }
 
-        [Fact]
-        public void MoveToTested_ThrowsException()
-        {
-            // Arrange
-            var backlogItemContextMock = new Mock<IBacklogItemContext>();
-            var doingState = new BacklogItemDoing(backlogItemContextMock.Object);
+            [Fact]
+            public void MoveToTested_ShouldThrowException()
+            {
+                // Arrange
+                var contextMock = new Mock<IBacklogItemContext>();
+                var backlogItemDoing = new BacklogItemDoing(contextMock.Object);
 
-            // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => doingState.MoveToTested());
-        }
+                // Act & Assert
+                Assert.Throws<InvalidOperationException>(() => backlogItemDoing.MoveToTested());
+            }
 
-        [Fact]
-        public void MoveToDone_ThrowsException()
-        {
-            // Arrange
-            var backlogItemContextMock = new Mock<IBacklogItemContext>();
-            var doingState = new BacklogItemDoing(backlogItemContextMock.Object);
+            [Fact]
+            public void MoveToDone_ShouldThrowException()
+            {
+                // Arrange
+                var contextMock = new Mock<IBacklogItemContext>();
+                var backlogItemDoing = new BacklogItemDoing(contextMock.Object);
 
-            // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => doingState.MoveToDone());
+                // Act & Assert
+                Assert.Throws<InvalidOperationException>(() => backlogItemDoing.MoveToDone());
+            }
         }
     }
 }

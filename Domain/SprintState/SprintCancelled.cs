@@ -13,6 +13,8 @@ namespace Domain.SprintState
         public SprintCancelled(ISprintContext sprint)
         {
             _sprint = sprint;
+            _sprint.NotifySubscribers($"Sprint {sprint} has been cancelled", "product owner");
+            _sprint.NotifySubscribers($"Sprint {sprint} has been cancelled", "scrum master");
         }
         public void StartSprint()
         {

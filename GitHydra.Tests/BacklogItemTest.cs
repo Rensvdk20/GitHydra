@@ -18,47 +18,46 @@ namespace GitHydra.Tests
             Assert.Equal(developer, backlogItem.GetDeveloper());
         }
 
-//        [Fact]
-//        public void BacklogItem_AddActivity_ActivityAddedSuccessfully()
-//        {
-//            // Arrange
-//            var backlogItem = new BacklogItem("Task", new Developer("John", "john@example.com"));
-//            var activity = new Activity("Activity", new Developer("Alice", "alice@example.com"), backlogItem);
-//
-//            // Act
-//            backlogItem.AddActivity(activity.GetName(), activity.GetDeveloper());
-//
-//            // Assert
-//           Assert.Contains(activity, backlogItem.GetActivities());
-//        }
+        [Fact]
+        public void BacklogItem_AddActivity_ActivityAddedSuccessfully()
+        {
+            // Arrange
+            var backlogItem = new BacklogItem("Task", new Developer("John", "john@example.com"));
 
-//        [Fact]
-//        public void BacklogItem_AddThread_ThreadAddedSuccessfully()
-//        {
-//            // Arrange
-//            var backlogItem = new BacklogItem("Task", new Developer("John", "john@example.com"));
-//            var thread = new Domain.Thread("Discussion thread");
-//
-//            // Act
-//            backlogItem.AddThread(thread);
-//
-//            // Assert
-//            Assert.Contains(thread, backlogItem.GetAllThreads());
-//        }
+            // Act
+            backlogItem.AddActivity("Activity", new Developer("Alice", "alice@example.com"));
 
-//        [Fact]
-//        public void BacklogItem_SetDeveloper_DeveloperChangedSuccessfully()
-//        {
-//            // Arrange
-//            var backlogItem = new BacklogItem("Task", new Developer("John", "john@example.com"));
-//            var newDeveloper = new Developer("Alice", "alice@example.com");
-//
-//            // Act
-//            backlogItem.SetDeveloper(newDeveloper);
-//
-//            // Assert
-//            Assert.Equal(newDeveloper, backlogItem.GetDeveloper());
-//        }
+            // Assert
+            Assert.Contains(backlogItem.GetActivities()[0], backlogItem.GetActivities());
+        }
+
+        [Fact]
+        public void BacklogItem_AddThread_ThreadAddedSuccessfully()
+        {
+            // Arrange
+            var backlogItem = new BacklogItem("Task", new Developer("John", "john@example.com"));
+            var thread = new Domain.Thread("Discussion thread", backlogItem);
+
+            // Act
+            backlogItem.AddThread(thread);
+
+            // Assert
+            Assert.Contains(thread, backlogItem.GetAllThreads());
+        }
+
+        [Fact]
+        public void BacklogItem_SetDeveloper_DeveloperChangedSuccessfully()
+        {
+            // Arrange
+            var backlogItem = new BacklogItem("Task", new Developer("John", "john@example.com"));
+            var newDeveloper = new Developer("Alice", "alice@example.com");
+
+            // Act
+            backlogItem.SetDeveloper(newDeveloper);
+
+            // Assert
+            Assert.Equal(newDeveloper, backlogItem.GetDeveloper());
+        }
 
         [Fact]
         public void BacklogItem_SetState_StateChangedSuccessfully()

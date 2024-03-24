@@ -11,6 +11,7 @@ namespace GitHydra.Tests.BacklogItemStateTests
         {
             // Arrange
             var backlogItemContextMock = new Mock<IBacklogItemContext>();
+            backlogItemContextMock.Setup(m => m.GetActivities()).Returns(new List<Activity>());
             var doneState = new BacklogItemDone(backlogItemContextMock.Object);
 
             // Act & Assert
@@ -22,6 +23,7 @@ namespace GitHydra.Tests.BacklogItemStateTests
         {
             // Arrange
             var backlogItemContextMock = new Mock<IBacklogItemContext>();
+            backlogItemContextMock.Setup(m => m.GetActivities()).Returns(new List<Activity>());
             var doneState = new BacklogItemDone(backlogItemContextMock.Object);
 
             // Act & Assert
@@ -33,6 +35,7 @@ namespace GitHydra.Tests.BacklogItemStateTests
         {
             // Arrange
             var backlogItemContextMock = new Mock<IBacklogItemContext>();
+            backlogItemContextMock.Setup(m => m.GetActivities()).Returns(new List<Activity>());
             var doneState = new BacklogItemDone(backlogItemContextMock.Object);
 
             // Act & Assert
@@ -44,6 +47,7 @@ namespace GitHydra.Tests.BacklogItemStateTests
         {
             // Arrange
             var backlogItemContextMock = new Mock<IBacklogItemContext>();
+            backlogItemContextMock.Setup(m => m.GetActivities()).Returns(new List<Activity>());
             var doneState = new BacklogItemDone(backlogItemContextMock.Object);
 
             // Act & Assert
@@ -55,6 +59,7 @@ namespace GitHydra.Tests.BacklogItemStateTests
         {
             // Arrange
             var backlogItemContextMock = new Mock<IBacklogItemContext>();
+            backlogItemContextMock.Setup(m => m.GetActivities()).Returns(new List<Activity>());
             var doneState = new BacklogItemDone(backlogItemContextMock.Object);
 
             // Act & Assert
@@ -66,6 +71,7 @@ namespace GitHydra.Tests.BacklogItemStateTests
         {
             // Arrange
             var backlogItemContextMock = new Mock<IBacklogItemContext>();
+            backlogItemContextMock.Setup(m => m.GetActivities()).Returns(new List<Activity>());
             var doneState = new BacklogItemDone(backlogItemContextMock.Object);
 
             // Act & Assert
