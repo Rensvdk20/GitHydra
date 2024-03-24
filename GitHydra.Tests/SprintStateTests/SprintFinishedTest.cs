@@ -7,30 +7,64 @@ namespace GitHydra.Tests.SprintStateTests
     public class SprintFinishedTest
     {
         [Fact]
-        public void StartSprint()
+        public void Constructor_WithoutReviewSummary_ThrowsException()
         {
+            // Arrange
             var sprintContextMock = new Mock<ISprintContext>();
-            var finishedState = new SprintFinished(sprintContextMock.Object);
+            sprintContextMock.Setup(m => m.GetReviewSummary()).Returns((string)null); // Geen review samenvatting instellen
 
-            Assert.Throws<InvalidOperationException>(() => finishedState.StartSprint());
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => new SprintFinished(sprintContextMock.Object));
         }
 
         [Fact]
-        public void CancelSprint()
+        public void Constructor_WithReviewSummary_CreatesInstance()
         {
+            // Arrange
             var sprintContextMock = new Mock<ISprintContext>();
-            var finishedState = new SprintFinished(sprintContextMock.Object);
+            sprintContextMock.Setup(m => m.GetReviewSummary()).Returns("Review summary"); // Review samenvatting instellen
 
-            Assert.Throws<InvalidOperationException>(() => finishedState.CancelSprint());
+            // Act
+            var sprintFinished = new SprintFinished(sprintContextMock.Object);
+
+            // Assert
+            Assert.NotNull(sprintFinished);
         }
 
         [Fact]
-        public void FinishSprint()
+        public void StartSprint_ThrowsException()
         {
+            // Arrange
             var sprintContextMock = new Mock<ISprintContext>();
-            var finishedState = new SprintFinished(sprintContextMock.Object);
+            sprintContextMock.Setup(m => m.GetReviewSummary()).Returns("Sample review summary");
+            var sprintFinished = new SprintFinished(sprintContextMock.Object);
 
-            Assert.Throws<InvalidOperationException>(() => finishedState.FinishSprint());
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => sprintFinished.StartSprint());
+        }
+
+        [Fact]
+        public void CancelSprint_ThrowsException()
+        {
+            // Arrange
+            var sprintContextMock = new Mock<ISprintContext>();
+            sprintContextMock.Setup(m => m.GetReviewSummary()).Returns("Sample review summary"); // Mocking the GetReviewSummary method to return a non-null value
+            var sprintFinished = new SprintFinished(sprintContextMock.Object);
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => sprintFinished.CancelSprint());
+        }
+
+        [Fact]
+        public void FinishSprint_ThrowsException()
+        {
+            // Arrange
+            var sprintContextMock = new Mock<ISprintContext>();
+            sprintContextMock.Setup(m => m.GetReviewSummary()).Returns("Sample review summary");
+            var sprintFinished = new SprintFinished(sprintContextMock.Object);
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => sprintFinished.FinishSprint());
         }
 
         [Fact]
@@ -38,10 +72,11 @@ namespace GitHydra.Tests.SprintStateTests
         {
             // Arrange
             var sprintContextMock = new Mock<ISprintContext>();
-            var finishedState = new SprintFinished(sprintContextMock.Object);
+            sprintContextMock.Setup(m => m.GetReviewSummary()).Returns("Sample review summary");
+            var sprintFinished = new SprintFinished(sprintContextMock.Object);
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => finishedState.Change("New Name", DateTime.Now, DateTime.Now.AddDays(7)));
+            Assert.Throws<InvalidOperationException>(() => sprintFinished.Change("New Name", DateTime.Now, DateTime.Now.AddDays(7)));
         }
     }
 }
