@@ -19,8 +19,9 @@ namespace Domain
         private ScrumMaster scrumMaster;
         private SprintObservable _sprintObservable;
         private Project? project;
+        private IDevOpsService? devOpsService;
 
-        public ProductSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy)
+        public ProductSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy, IDevOpsService? devOpsService = null)
         {
             this.name = name;
             this.startDate = startDate;
@@ -31,6 +32,7 @@ namespace Domain
             this.sprintState = new SprintCreated(this);
             this._sprintObservable = new SprintObservable(this);
             this.project = null;
+            this.devOpsService = devOpsService;
         }
 
         public override string ToString()
@@ -100,6 +102,11 @@ namespace Domain
         public Project GetProject()
         {
             return this.project ?? throw new InvalidOperationException("This sprint is not attached to a project");
+        }
+
+        public IDevOpsService? GetDevOpsService()
+        {
+            return devOpsService;
         }
     }
 }

@@ -6,6 +6,7 @@ using Infrastructure;
 using Infrastructure.ExportBehaviour;
 using Infrastructure.Listeners;
 using Thread = Domain.Thread;
+using Infrastructure.DevOps;
 
 namespace Portal
 {
@@ -25,10 +26,14 @@ namespace Portal
             //var backlog = sprint.GetSprintBacklog().AddBacklogItem("Login", testdeveloper);
             //backlog.AddActivity("testtt", testdeveloper);
             //backlog.AddThread(new Thread("Login feature"));
+            var devOpsPipeline = new DevOpsPipeline();
+            var devOpsGit = new DevOpsGit();
+            var devOpsAdapter = new DevOpsAdapter(devOpsPipeline, devOpsGit);
+            var devOpsService = new DevOpsService(devOpsAdapter);
 
             EmployeeFactory factory = new EmployeeFactory();
             ScrumMaster testscrummaster = (ScrumMaster) factory.CreateEmployee("Peter", "peter@mail.com", "ScrumMaster");
-            var sprint = new ReleaseSprint("test", DateTime.Now, DateTime.Now, testscrummaster, new ExportPDF());
+            var sprint = new ReleaseSprint("test", DateTime.Now, DateTime.Now, testscrummaster, new ExportPDF(), devOpsService);
 
             sprint.Subscribe(new EmailSubscriber());
             //sprint.Subscribe(new SlackSubscriber());
@@ -57,6 +62,10 @@ namespace Portal
             backlogitem.SetState(new BacklogItemTested(backlogitem));
             backlogitem.GetActivities()[0].SetDone(true);
             backlogitem.SetState(new BacklogItemDone(backlogitem));
+
+            sprint.GetDevOpsService().GetSource();
+            sprint.GetDevOpsService().Push();
+            sprint.GetDevOpsService().Commit();
         }
     }
 }
