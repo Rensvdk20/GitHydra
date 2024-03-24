@@ -6,7 +6,7 @@
         void Pull();
         void Commit();
         void Stash();
-        void Pop();
+        void Branch();
         void Checkout();
     }
 }
