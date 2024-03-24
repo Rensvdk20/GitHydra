@@ -81,9 +81,19 @@ namespace Domain
             this.startDate = startDate;
         }
 
+        public DateTime GetStartDate()
+        {
+            return this.startDate;
+        }
+
         public void SetEndDate(DateTime endDate)
         {
             this.endDate = endDate;
+        }
+
+        public DateTime GetEndDate()
+        {
+            return this.endDate;
         }
 
         public ISprintState GetState()

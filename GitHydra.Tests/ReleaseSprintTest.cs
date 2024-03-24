@@ -3,6 +3,7 @@ using Domain.Interfaces;
 using Domain;
 using Infrastructure.ExportBehaviour;
 using Moq;
+using Infrastructure.DevOps;
 
 namespace GitHydra.Tests
 {
@@ -68,6 +69,62 @@ namespace GitHydra.Tests
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => sprint.RunPipeline());
+        }
+
+        [Fact]
+        public void GetReviewSummary_ReturnsReviewSummary()
+        {
+            // Arrange
+            var sprint = new ReleaseSprint("Sprint 1", new DateTime(2024, 3, 1), new DateTime(2024, 3, 15), new ScrumMaster("Jan", "Jan@mail.com"), new ExportPDF(), new Mock<IDevOpsPipelineService>().Object);
+            var reviewSummary = "Test review summary";
+            sprint.SetReviewSummary(reviewSummary);
+
+            // Act
+            var result = sprint.GetReviewSummary();
+
+            // Assert
+            Assert.Equal(reviewSummary, result);
+        }
+
+        [Fact]
+        public void GetSprintBacklog_ReturnsSprintBacklog()
+        {
+            // Arrange
+            var sprint = new ReleaseSprint("Sprint 1", new DateTime(2024, 3, 1), new DateTime(2024, 3, 15), new ScrumMaster("Jan", "Jan@mail.com"), new ExportPDF(), new Mock<IDevOpsPipelineService>().Object);
+
+            // Act
+            var result = sprint.GetSprintBacklog();
+
+            // Assert
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void SetProject_SetsProjectCorrectly()
+        {
+            // Arrange
+            var sprint = new ReleaseSprint("Sprint 1", new DateTime(2024, 3, 1), new DateTime(2024, 3, 15), new ScrumMaster("Jan", "Jan@mail.com"), new ExportPDF(), new Mock<IDevOpsPipelineService>().Object);
+            var project = new Project("Project 1", new ProductOwner("Owner", "owner@example.com"), new DevOpsGitService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit())));
+
+            // Act
+            sprint.SetProject(project);
+
+            // Assert
+            Assert.Equal(project, sprint.GetProject());
+        }
+
+        [Fact]
+        public void GetDevOpsPipelineService_ReturnsPipelineService()
+        {
+            // Arrange
+            var pipelineServiceMock = new Mock<IDevOpsPipelineService>();
+            var sprint = new ReleaseSprint("Sprint 1", new DateTime(2024, 3, 1), new DateTime(2024, 3, 15), new ScrumMaster("Jan", "Jan@mail.com"), new ExportPDF(), pipelineServiceMock.Object);
+
+            // Act
+            var result = sprint.GetDevOpsPipelineService();
+
+            // Assert
+            Assert.Equal(pipelineServiceMock.Object, result);
         }
     }
 }

@@ -81,5 +81,65 @@ namespace GitHydra.Tests
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => sprint.RunPipeline());
         }
+
+        [Fact]
+        public void Export_CallsExportStrategyExportMethod()
+        {
+            // Arrange
+            var name = "Sprint 1";
+            var startDate = new DateTime(2024, 3, 1);
+            var endDate = new DateTime(2024, 3, 15);
+            var scrumMaster = new ScrumMaster("John", "john@example.com");
+            var exportStrategyMock = new Mock<IExportStrategy>();
+            var sprint = new ProductSprint(name, startDate, endDate, scrumMaster, exportStrategyMock.Object);
+
+            // Act
+            sprint.Export();
+
+            // Assert
+            exportStrategyMock.Verify(strategy => strategy.Export(sprint), Times.Once);
+        }
+
+        [Fact]
+        public void Change_SetsNameAndDatesCorrectly()
+        {
+            // Arrange
+            var name = "Sprint 1";
+            var startDate = new DateTime(2024, 3, 1);
+            var endDate = new DateTime(2024, 3, 15);
+            var scrumMaster = new ScrumMaster("John", "john@example.com");
+            var exportStrategyMock = new Mock<IExportStrategy>();
+            var sprint = new ProductSprint(name, startDate, endDate, scrumMaster, exportStrategyMock.Object);
+
+            var newName = "New Sprint Name";
+            var newStartDate = new DateTime(2024, 4, 1);
+            var newEndDate = new DateTime(2024, 4, 15);
+
+            // Act
+            sprint.Change(newName, newStartDate, newEndDate);
+
+            // Assert
+            Assert.Equal(newName, sprint.ToString());
+            Assert.Equal(newStartDate, sprint.GetStartDate());
+            Assert.Equal(newEndDate, sprint.GetEndDate());
+        }
+
+        [Fact]
+        public void GetScrumMaster_ReturnsScrumMaster()
+        {
+            // Arrange
+            var name = "Sprint 1";
+            var startDate = new DateTime(2024, 3, 1);
+            var endDate = new DateTime(2024, 3, 15);
+            var scrumMaster = new ScrumMaster("John", "john@example.com");
+            var exportStrategyMock = new Mock<IExportStrategy>();
+            var sprint = new ProductSprint(name, startDate, endDate, scrumMaster, exportStrategyMock.Object);
+
+            // Act
+            var result = sprint.GetScrumMaster();
+
+            // Assert
+            Assert.Equal(scrumMaster, result);
+        }
     }
 }
