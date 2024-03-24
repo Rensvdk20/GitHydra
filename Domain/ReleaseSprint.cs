@@ -113,9 +113,9 @@ namespace Domain
             return this.project ?? throw new InvalidOperationException("This sprint is not attached to a project");
         }
 
-        public void SetReviewSummary()
+        public void SetReviewSummary(string review)
         {
-            this.reviewSummary = reviewSummary;
+            this.reviewSummary = review;
         }
 
         public IDevOpsPipelineService GetDevOpsPipelineService()
@@ -127,6 +127,16 @@ namespace Domain
         public IDevOpsGitService GetDevOpsGitService()
         {
             return devOpsGitService;
+        }
+
+        public bool RunPipeline()
+        {
+            if (devOpsPipelineService != null)
+            {
+                return devOpsPipelineService.RunPipeline();
+            }
+
+            throw new InvalidOperationException("Sprint heeft geen pipeline");
         }
     }
 }

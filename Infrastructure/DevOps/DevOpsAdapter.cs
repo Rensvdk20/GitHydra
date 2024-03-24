@@ -21,11 +21,16 @@ namespace Infrastructure.DevOps
         public void GetDeployment() => _pipeline.Deployment();
         public void GetUtility() => _pipeline.Utility();
 
+        public bool RunPipeline()
+        {
+            return false;
+        }
+
         public void Push() => _git.Push();
         public void Pull() => _git.Pull();
         public void Commit() => _git.Commit();
         public void Stash() => _git.Stash();
-        public void Pop() => _git.Pop();
+        public void Branch() => _git.Branch();
         public void Checkout() => _git.Checkout();
     }
 }

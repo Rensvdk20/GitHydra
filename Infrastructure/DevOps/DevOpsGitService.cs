@@ -15,7 +15,7 @@ namespace Infrastructure.DevOps
         public void Pull() => _devOpsAdapter.Pull();
         public void Commit() => _devOpsAdapter.Commit();
         public void Stash() => _devOpsAdapter.Stash();
-        public void Pop() => _devOpsAdapter.Pop();
+        public void Branch() => _devOpsAdapter.Branch();
         public void Checkout() => _devOpsAdapter.Checkout();
     }
 }

@@ -164,10 +164,10 @@ namespace GitHydra.Tests
             var adapter = new DevOpsAdapter(pipelineMock.Object, gitMock.Object);
 
             // Act
-            adapter.Pop();
+            adapter.Branch();
 
             // Assert
-            gitMock.Verify(g => g.Pop(), Times.Once);
+            gitMock.Verify(g => g.Branch(), Times.Once);
         }
 
         [Fact]

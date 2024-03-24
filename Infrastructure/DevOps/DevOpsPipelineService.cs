@@ -11,11 +11,45 @@ namespace Infrastructure.DevOps
             _devOpsAdapter = devOpsAdapter;
         }
 
-        public void GetSource() => _devOpsAdapter.GetSource();
-        public void GetPackage() => _devOpsAdapter.GetPackage();
-        public void GetTest() => _devOpsAdapter.GetTest();
-        public void GetAnalysis() => _devOpsAdapter.GetAnalysis();
-        public void GetDeployment() => _devOpsAdapter.GetDeployment();
-        public void GetUtility() => _devOpsAdapter.GetUtility();
+        public void GetSource()
+        {
+            _devOpsAdapter.GetSource();
+        }
+
+        public void GetPackage()
+        {
+            _devOpsAdapter.GetPackage();
+        }
+
+        public void GetTest()
+        {
+            _devOpsAdapter.GetTest();
+        }
+
+        public void GetAnalysis()
+        {
+            _devOpsAdapter.GetAnalysis();
+        }
+
+        public void GetDeployment()
+        {
+            _devOpsAdapter.GetDeployment();
+        }
+
+        public void GetUtility()
+        {
+            _devOpsAdapter.GetUtility();
+        }
+
+        public bool RunPipeline()
+        {
+            GetSource();
+            GetPackage();
+            GetTest();
+            GetAnalysis();
+            GetDeployment();
+            GetUtility();
+            return true;
+        }
     }
 }

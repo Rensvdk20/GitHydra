@@ -9,6 +9,8 @@
         void SetEndDate(DateTime endDate);
         void NotifySubscribers(string message, string employee);
         string ToString();
+        void SetReviewSummary(string review);
         string GetReviewSummary();
+        bool RunPipeline();
     }
 }

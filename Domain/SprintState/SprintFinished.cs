@@ -19,6 +19,16 @@ namespace Domain.SprintState
                 throw new InvalidOperationException("Cannot finish a sprint that doesn't have a review summary");
             }
 
+            if (_sprint.RunPipeline())
+            {
+                _sprint.NotifySubscribers($"Pipeline has finished succesfully", "product owner");
+                _sprint.NotifySubscribers($"Pipeline has finished succesfully", "scrum master");
+            } else
+            {
+                _sprint.NotifySubscribers($"Pipeline has failed", "product owner");
+                _sprint.NotifySubscribers($"Pipeline has failed", "scrum master");
+            }
+
             _sprint.NotifySubscribers($"Sprint {sprint} is finished", "product owner");
             _sprint.NotifySubscribers($"Sprint {sprint} is finished", "scrum master");
         }

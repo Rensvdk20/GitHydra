@@ -8,5 +8,6 @@
         void GetAnalysis();
         void GetDeployment();
         void GetUtility();
+        bool RunPipeline();
     }
 }
