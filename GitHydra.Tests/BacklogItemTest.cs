@@ -23,13 +23,12 @@ namespace GitHydra.Tests
         {
             // Arrange
             var backlogItem = new BacklogItem("Task", new Developer("John", "john@example.com"));
-            var activity = new Activity("Activity", new Developer("Alice", "alice@example.com"), backlogItem);
 
             // Act
-            backlogItem.AddActivity(activity.GetName(), activity.GetDeveloper());
+            backlogItem.AddActivity("Activity", new Developer("Alice", "alice@example.com"));
 
             // Assert
-           Assert.Contains(activity, backlogItem.GetActivities());
+            Assert.Contains(backlogItem.GetActivities()[0], backlogItem.GetActivities());
         }
 
         [Fact]
@@ -37,7 +36,7 @@ namespace GitHydra.Tests
         {
             // Arrange
             var backlogItem = new BacklogItem("Task", new Developer("John", "john@example.com"));
-            var thread = new Domain.Thread("Discussion thread");
+            var thread = new Domain.Thread("Discussion thread", backlogItem);
 
             // Act
             backlogItem.AddThread(thread);

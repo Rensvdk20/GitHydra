@@ -87,7 +87,7 @@ namespace Domain
             }
 
             //Send message to scrum master
-            this.GetSprintBacklog().GetSprint().NotifySubscribers($"Developer {this.developer} has been replaced by {developer} in backlog item: {this.name}", "scrum master");
+            this.GetSprintBacklog()?.GetSprint().NotifySubscribers($"Developer {this.developer} has been replaced by {developer} in backlog item: {this.name}", "scrum master");
             this.developer = developer;
         }
 
@@ -98,9 +98,12 @@ namespace Domain
 
         public virtual bool IsChangeable()
         {
-            if (sprintBacklog.GetSprint != null)
+            if (sprintBacklog != null)
             {
-                return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated") || !(_currentState is BacklogItemDone);
+                if (sprintBacklog.GetSprint() != null)
+                {
+                    return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated") || !(_currentState is BacklogItemDone);
+                }
             }
 
             return true;
