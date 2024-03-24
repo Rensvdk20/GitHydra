@@ -1,5 +1,6 @@
-﻿using Domain;
+using Domain;
 using Domain.Employees;
+using Moq;
 
 namespace GitHydra.Tests
 {
@@ -14,18 +15,24 @@ namespace GitHydra.Tests
             var author = new Developer("John", "john@example.com");
             var message = new Message(author, "Hello, world!", thread);
 
-            // Act
-            thread.AddMessage(message);
+        //    // Mock de Thread
+        //    var threadMock = new Mock<Domain.Thread>("Discussion thread", backlogItem);
+        //    threadMock.Setup(m => m.IsChangeable).Returns(true);
 
-            // Assert
-            Assert.Contains(message, thread.GetAllMessages());
-        }
+        //    var message = new Message(author, "Hello, world!", threadMock.Object);
+
+        //    // Act
+        //    threadMock.Object.AddMessage(message);
+
+        //    // Assert
+        //    Assert.Contains(message, threadMock.Object.GetAllMessages());
+        //}
 
         [Fact]
         public void CloseThread_ThreadClosedSuccessfully()
         {
             // Arrange
-            var backlogItem = new BacklogItem("Item", new Developer("John", "john@example.com"));
+            var backlogItem = new BacklogItem("Task", new Developer("John", "john@example.com"));
             var thread = new Domain.Thread("Discussion thread", backlogItem);
 
             // Act

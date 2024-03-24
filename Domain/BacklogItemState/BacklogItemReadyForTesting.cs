@@ -7,7 +7,9 @@
         public BacklogItemReadyForTesting(IBacklogItemContext context)
         {
             this._context = context;
-            context.GetSprintBacklog().GetSprint().NotifySubscribers($"{context} is ready for testing", "testers");
+            if (context.GetSprintBacklog() != null) {
+                context.GetSprintBacklog().GetSprint().NotifySubscribers($"{context} is ready for testing", "testers");
+            }
         }
 
         public void MoveToTodo()

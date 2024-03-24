@@ -1,4 +1,4 @@
-﻿using Domain.BacklogItemState;
+using Domain.BacklogItemState;
 using Domain.Employees;
 using Domain.Observer;
 
@@ -14,19 +14,7 @@ namespace Domain
         private IBacklogItemState _currentState;
         private SprintBacklog? sprintBacklog;
 
-        public BacklogItem(string name, Developer developer)
-        {
-            // Parameters
-            this.developer = developer;
-
-            // Defaults
-            this._activities = new List<Activity>();
-            this._threads = new List<IThread>();
-            this._currentState = new BacklogItemState.BacklogItemTodo(this);
-            this.sprintBacklog = null;
-        }
-
-        public BacklogItem(string name, Developer developer, SprintBacklog sprintBacklog)
+        public BacklogItem(string name, Developer developer, SprintBacklog? sprintBacklog = null)
         {
             // Parameters
             this.name = name;
@@ -99,7 +87,7 @@ namespace Domain
             }
 
             //Send message to scrum master
-            this.GetSprintBacklog().GetSprint().NotifySubscribers($"Developer {this.developer} has been replaced by {developer} in backlog item: {this.name}", "scrum master");
+            this.GetSprintBacklog()?.GetSprint().NotifySubscribers($"Developer {this.developer} has been replaced by {developer} in backlog item: {this.name}", "scrum master");
             this.developer = developer;
         }
 
@@ -112,8 +100,12 @@ namespace Domain
         {
             if (sprintBacklog != null)
             {
-                return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated") || !(_currentState is BacklogItemDone);
+                if (sprintBacklog.GetSprint() != null)
+                {
+                    return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated") || !(_currentState is BacklogItemDone);
+                }
             }
+
             return true;
         }
 

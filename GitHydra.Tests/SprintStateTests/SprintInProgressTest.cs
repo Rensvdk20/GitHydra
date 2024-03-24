@@ -30,6 +30,7 @@ namespace GitHydra.Tests.SprintStateTests
         public void FinishSprint()
         {
             var sprintContextMock = new Mock<ISprintContext>();
+            sprintContextMock.Setup(m => m.GetReviewSummary()).Returns("Sample review summary");
             var inProgressState = new SprintInProgress(sprintContextMock.Object);
 
             inProgressState.FinishSprint();
