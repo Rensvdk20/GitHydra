@@ -12,7 +12,7 @@ namespace Domain
         private List<IThread> _threads;
         private Developer developer;
         private IBacklogItemState _currentState;
-        private SprintBacklog sprintBacklog;
+        private SprintBacklog? sprintBacklog;
 
         public BacklogItem(string name, Developer developer)
         {
@@ -23,6 +23,7 @@ namespace Domain
             this._activities = new List<Activity>();
             this._threads = new List<IThread>();
             this._currentState = new BacklogItemState.BacklogItemTodo(this);
+            this.sprintBacklog = null;
         }
 
         public BacklogItem(string name, Developer developer, SprintBacklog sprintBacklog)
@@ -68,7 +69,7 @@ namespace Domain
             return _activities;
         }
 
-        public SprintBacklog GetSprintBacklog()
+        public SprintBacklog? GetSprintBacklog()
         {
             return this.sprintBacklog;
         }

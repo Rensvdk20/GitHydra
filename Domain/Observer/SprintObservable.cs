@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Employees;
+using Domain.Interfaces;
 
 namespace Domain.Observer
 {
@@ -36,6 +37,16 @@ namespace Domain.Observer
                     break;
                 case "testers":
                     receivers = sprint.GetProject().GetTesters().Cast<IEmployee>().ToList();
+                    break;
+                case "developers":
+                    List<Developer> developers = new();
+
+                    foreach (var backlogItem in sprint.GetSprintBacklog().GetBacklogItems())
+                    {
+                        developers.Add(backlogItem.GetDeveloper());
+                    }
+
+                    receivers = developers.Cast<IEmployee>().ToList();
                     break;
             }
 

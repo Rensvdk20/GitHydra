@@ -1,4 +1,6 @@
-﻿namespace Domain
+﻿using System.Threading;
+
+namespace Domain
 {
     public class Thread : IThread
     {
@@ -19,6 +21,7 @@
             if (this.IsChangeable())
             {
                 messages.Add(message);
+                NotifyTeamMembersOfNewMessage();
             }
 
             throw new InvalidOperationException("Can't add a message when the thread/backlog item/sprint is closed");
@@ -39,6 +42,11 @@
             return status;
         }
 
+        public BacklogItem GetBacklogItem()
+        {
+            return backlogItem;
+        }
+
         public bool IsChangeable()
         {
             return this.backlogItem.IsChangeable() || this.status;
@@ -47,6 +55,13 @@
         public String GetTopic()
         {
             return topic;
+        }
+
+        public void NotifyTeamMembersOfNewMessage()
+        {
+            GetBacklogItem().GetSprintBacklog()?.GetSprint().NotifySubscribers($"New message from ${GetTopic()}", "scrum master");
+            GetBacklogItem().GetSprintBacklog()?.GetSprint().NotifySubscribers($"New message from ${GetTopic()}", "testers");
+            GetBacklogItem().GetSprintBacklog()?.GetSprint().NotifySubscribers($"New message from ${GetTopic()}", "developers");
         }
     }
 }
