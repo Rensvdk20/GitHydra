@@ -1,6 +1,6 @@
 ﻿namespace Domain
 {
-    public interface IDevOpsService
+    public interface IDevOpsPipelineService
     {
         void GetSource();
         void GetPackage();
@@ -8,11 +8,5 @@
         void GetAnalysis();
         void GetDeployment();
         void GetUtility();
-        void Push();
-        void Pull();
-        void Commit();
-        void Stash();
-        void Pop();
-        void Checkout();
     }
 }

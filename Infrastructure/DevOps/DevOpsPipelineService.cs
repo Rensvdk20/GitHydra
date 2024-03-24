@@ -2,11 +2,11 @@
 
 namespace Infrastructure.DevOps
 {
-    public class DevOpsService : IDevOpsService
+    public class DevOpsPipelineService : IDevOpsPipelineService
     {
         private readonly DevOpsAdapter _devOpsAdapter;
 
-        public DevOpsService(DevOpsAdapter devOpsAdapter)
+        public DevOpsPipelineService(DevOpsAdapter devOpsAdapter)
         {
             _devOpsAdapter = devOpsAdapter;
         }
@@ -17,11 +17,5 @@ namespace Infrastructure.DevOps
         public void GetAnalysis() => _devOpsAdapter.GetAnalysis();
         public void GetDeployment() => _devOpsAdapter.GetDeployment();
         public void GetUtility() => _devOpsAdapter.GetUtility();
-        public void Push() => _devOpsAdapter.Push();
-        public void Pull() => _devOpsAdapter.Pull();
-        public void Commit() => _devOpsAdapter.Commit();
-        public void Stash() => _devOpsAdapter.Stash();
-        public void Pop() => _devOpsAdapter.Pop();
-        public void Checkout() => _devOpsAdapter.Checkout();
     }
 }

@@ -1,4 +1,4 @@
-﻿using Domain;
+using Domain;
 using Domain.Employees;
 using Moq;
 
@@ -10,8 +10,10 @@ namespace GitHydra.Tests
         //public void AddMessage_MessageAddedSuccessfully()
         //{
         //    // Arrange
-        //    var backlogItem = new BacklogItem("Task", new Developer("John", "john@example.com"));
+        //    var backlogItem = new BacklogItem("Item", new Developer("John", "john@example.com"));
+        //    var thread = new Domain.Thread("Discussion thread", backlogItem);
         //    var author = new Developer("John", "john@example.com");
+        //    var message = new Message(author, "Hello, world!", thread);
 
         //    // Mock de Thread
         //    var threadMock = new Mock<Domain.Thread>("Discussion thread", backlogItem);
