@@ -2,6 +2,7 @@
 using Domain.Interfaces;
 using Domain;
 using Moq;
+using Domain.Observer;
 
 namespace GitHydra.Tests
 {
@@ -140,6 +141,34 @@ namespace GitHydra.Tests
 
             // Assert
             Assert.Equal(scrumMaster, result);
+        }
+
+        [Fact]
+        public void SetProject_SetsProjectSuccessfully()
+        {
+            // Arrange
+            var sprint = new ProductSprint("Sprint 1", DateTime.Now, DateTime.Now.AddDays(14), new ScrumMaster("John", "john@example.com"), new Mock<IExportStrategy>().Object);
+            var project = new Project("Project 1", new ProductOwner("John", "john@example.com"), new Mock<IDevOpsGitService>().Object);
+
+            // Act
+            sprint.SetProject(project);
+
+            // Assert
+            Assert.Equal(project, sprint.GetProject());
+        }
+
+        [Fact]
+        public void GetDevOpsPipelineService_ReturnsPipelineService()
+        {
+            // Arrange
+            var pipelineServiceMock = new Mock<IDevOpsPipelineService>();
+            var sprint = new ProductSprint("Sprint 1", DateTime.Now, DateTime.Now.AddDays(14), new ScrumMaster("John", "john@example.com"), new Mock<IExportStrategy>().Object);
+
+            // Act
+            var result = sprint.GetDevOpsPipelineService();
+
+            // Assert
+            Assert.Equal(pipelineServiceMock.Object, pipelineServiceMock.Object);
         }
     }
 }
