@@ -20,6 +20,7 @@
             if (thread.IsChangeable())
             {
                 messages.Add(message);
+                thread.NotifyTeamMembersOfNewMessage();
             }
         }
 

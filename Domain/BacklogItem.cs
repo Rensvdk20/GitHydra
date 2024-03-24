@@ -57,7 +57,7 @@ namespace Domain
             return _activities;
         }
 
-        public SprintBacklog GetSprintBacklog()
+        public SprintBacklog? GetSprintBacklog()
         {
             return this.sprintBacklog;
         }

@@ -1,8 +1,9 @@
 ﻿using Domain;
+using Domain.Interfaces;
 
 namespace Infrastructure.DevOps
 {
-    public class DevOpsAdapter : IDevOpsService
+    public class DevOpsAdapter : IDevOpsPipelineService, IDevOpsGitService
     {
         private readonly DevOpsPipeline _pipeline;
         private readonly DevOpsGit _git;
@@ -20,11 +21,16 @@ namespace Infrastructure.DevOps
         public void GetDeployment() => _pipeline.Deployment();
         public void GetUtility() => _pipeline.Utility();
 
+        public bool RunPipeline()
+        {
+            return false;
+        }
+
         public void Push() => _git.Push();
         public void Pull() => _git.Pull();
         public void Commit() => _git.Commit();
         public void Stash() => _git.Stash();
-        public void Pop() => _git.Pop();
+        public void Branch() => _git.Branch();
         public void Checkout() => _git.Checkout();
     }
 }

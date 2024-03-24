@@ -29,11 +29,12 @@ namespace Portal
             var devOpsPipeline = new DevOpsPipeline();
             var devOpsGit = new DevOpsGit();
             var devOpsAdapter = new DevOpsAdapter(devOpsPipeline, devOpsGit);
-            var devOpsService = new DevOpsService(devOpsAdapter);
+            var devOpsPipelineService = new DevOpsPipelineService(devOpsAdapter);
+            var devOpsGitService = new DevOpsGitService(devOpsAdapter);
 
             EmployeeFactory factory = new EmployeeFactory();
             ScrumMaster testscrummaster = (ScrumMaster) factory.CreateEmployee("Peter", "peter@mail.com", "ScrumMaster");
-            var sprint = new ReleaseSprint("test", DateTime.Now, DateTime.Now, testscrummaster, new ExportPDF(), devOpsService);
+            var sprint = new ReleaseSprint("test", DateTime.Now, DateTime.Now, testscrummaster, new ExportPDF(), devOpsPipelineService, devOpsGitService);
 
             sprint.Subscribe(new EmailSubscriber());
             //sprint.Subscribe(new SlackSubscriber());
@@ -46,8 +47,9 @@ namespace Portal
             project.AddSprint(sprint);
 
             //sprint.SetSprintState(new SprintCancelled(sprint));
-            //sprint.GetState().StartSprint();
-            //sprint.GetState().FinishSprint();
+            sprint.GetState().StartSprint();
+            sprint.SetReviewSummary("Test");
+            sprint.GetState().FinishSprint(); // Automatically 
 
             project.AddTester(new Tester("tester1", "tester1@gmail.com"));
             project.AddTester(new Tester("tester2", "tester2@gmail.com"));
@@ -63,9 +65,8 @@ namespace Portal
             backlogitem.GetActivities()[0].SetDone(true);
             backlogitem.SetState(new BacklogItemDone(backlogitem));
 
-            sprint.GetDevOpsService().GetSource();
-            sprint.GetDevOpsService().Push();
-            sprint.GetDevOpsService().Commit();
+            sprint.GetDevOpsGitService().Pull();
+            //sprint.RunPipeline();
         }
     }
 }

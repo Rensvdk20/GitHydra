@@ -20,9 +20,10 @@ namespace Domain
         private ScrumMaster scrumMaster;
         private SprintObservable _sprintObservable;
         private Project? project;
-        private IDevOpsService _devOpsService;
+        private IDevOpsPipelineService devOpsPipelineService;
+        private IDevOpsGitService devOpsGitService;
 
-        public ReleaseSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy, IDevOpsService devOpsService)
+        public ReleaseSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy, IDevOpsPipelineService devOpsPipelineService, IDevOpsGitService devOpsGitService)
         {
             this.name = name;
             this.startDate = startDate;
@@ -33,7 +34,8 @@ namespace Domain
             this.sprintState = new SprintCreated(this);
             this._sprintObservable = new SprintObservable(this);
             this.project = null;
-            this._devOpsService = devOpsService;
+            this.devOpsPipelineService = devOpsPipelineService;
+            this.devOpsGitService = devOpsGitService;
         }
 
         public override string ToString()
@@ -111,14 +113,30 @@ namespace Domain
             return this.project ?? throw new InvalidOperationException("This sprint is not attached to a project");
         }
 
-        public void SetReviewSummary()
+        public void SetReviewSummary(string review)
         {
-            this.reviewSummary = reviewSummary;
+            this.reviewSummary = review;
         }
 
-        public IDevOpsService GetDevOpsService()
+        public IDevOpsPipelineService GetDevOpsPipelineService()
         {
-            return _devOpsService;
+            return devOpsPipelineService;
+        }
+
+
+        public IDevOpsGitService GetDevOpsGitService()
+        {
+            return devOpsGitService;
+        }
+
+        public bool RunPipeline()
+        {
+            if (devOpsPipelineService != null)
+            {
+                return devOpsPipelineService.RunPipeline();
+            }
+
+            throw new InvalidOperationException("Sprint heeft geen pipeline");
         }
     }
 }
