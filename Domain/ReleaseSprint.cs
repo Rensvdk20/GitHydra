@@ -16,7 +16,6 @@ namespace Domain
         private string reviewSummary;
 
         private ISprintState sprintState;
-        private IEnumerable<Developer> developers;
         private ScrumMaster scrumMaster;
         private SprintObservable _sprintObservable;
         private Project? project;

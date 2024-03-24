@@ -14,10 +14,5 @@
         {
             return this.name;
         }
-
-        public void CompleteSprint(String sprintName)
-        {
-
-        }
     }
 }
