@@ -6,16 +6,16 @@
         private String content;
         private DateTime timestamp = new DateTime();
         private List<IMessage> messages = new();
-        private Thread thread;
+        private IThread thread;
 
-        public Message(IEmployee author, string content, Thread thread)
+        public Message(IEmployee author, string content, IThread thread)
         {
             this.author = author;
             this.content = content;
             this.thread = thread;
         }
 
-        public void addMessage(IMessage message)
+        public void AddMessage(IMessage message)
         {
             if (thread.IsChangeable())
             {
@@ -27,6 +27,21 @@
         public List<IMessage> GetAllMessages()
         {
             return this.messages;
+        }
+
+        public IEmployee GetAuthor()
+        {
+            return this.author;
+        }
+
+        public string GetContent()
+        {
+            return this.content;
+        }
+
+        public IThread GetThread()
+        {
+            return this.thread;
         }
     }
 }

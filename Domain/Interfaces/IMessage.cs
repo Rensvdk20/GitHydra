@@ -2,7 +2,7 @@
 {
     public interface IMessage
     {
-        void addMessage(IMessage message);
+        void AddMessage(IMessage message);
         List<IMessage> GetAllMessages();
     }
 }
