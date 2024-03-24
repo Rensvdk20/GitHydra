@@ -1,4 +1,6 @@
 ﻿using Domain.Employees;
+using Domain.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace Domain
 {
@@ -9,12 +11,14 @@ namespace Domain
         private Backlog backlog;
         private List<ISprint> sprints = new();
         private List<Tester> testers = new();
+        private IDevOpsGitService devOpsGitService;
 
-        public Project(string name, ProductOwner productOwner)
+        public Project(string name, ProductOwner productOwner, IDevOpsGitService devOpsGitService)
         {
             this.name = name;
             this.productOwner = productOwner;
             this.backlog = new Backlog();
+            this.devOpsGitService = devOpsGitService;
         }
 
         public ProductOwner GetProductOwner()
@@ -33,9 +37,19 @@ namespace Domain
             sprint.SetProject(this);
         }
 
+        public List<ISprint> GetSprints()
+        {
+            return this.sprints;
+        }
+
         public void AddTester(Tester tester)
         {
             testers.Add(tester);
+        }
+
+        public IDevOpsGitService GetDevOpsGitService()
+        {
+            return devOpsGitService;
         }
     }
 }

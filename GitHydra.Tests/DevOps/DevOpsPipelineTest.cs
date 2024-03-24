@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Infrastructure.DevOps;
 
-namespace GitHydra.Tests
+namespace GitHydra.Tests.DevOps
 {
     public class DevOpsPipelineTest
     {

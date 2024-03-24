@@ -18,6 +18,11 @@ namespace Domain.Observer
             this._subscribers.Add(subscriber);
         }
 
+        public List<ISubscriber> GetSubscribers()
+        {
+            return this._subscribers;
+        }
+
         public void Unsubscribe(ISubscriber subscriber)
         {
             this._subscribers.Remove(subscriber);
@@ -41,9 +46,12 @@ namespace Domain.Observer
                 case "developers":
                     List<Developer> developers = new();
 
-                    foreach (var backlogItem in sprint.GetSprintBacklog().GetBacklogItems())
+                    if (sprint.GetSprintBacklog() != null)
                     {
-                        developers.Add(backlogItem.GetDeveloper());
+                        foreach (var backlogItem in sprint.GetSprintBacklog().GetBacklogItems())
+                        {
+                            developers.Add(backlogItem.GetDeveloper());
+                        }
                     }
 
                     receivers = developers.Cast<IEmployee>().ToList();

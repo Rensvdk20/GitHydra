@@ -21,9 +21,8 @@ namespace Domain
         private SprintObservable _sprintObservable;
         private Project? project;
         private IDevOpsPipelineService devOpsPipelineService;
-        private IDevOpsGitService devOpsGitService;
 
-        public ReleaseSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy, IDevOpsPipelineService devOpsPipelineService, IDevOpsGitService devOpsGitService)
+        public ReleaseSprint(string name, DateTime startDate, DateTime endDate, ScrumMaster scrumMaster, IExportStrategy exportStrategy, IDevOpsPipelineService devOpsPipelineService)
         {
             this.name = name;
             this.startDate = startDate;
@@ -35,7 +34,6 @@ namespace Domain
             this._sprintObservable = new SprintObservable(this);
             this.project = null;
             this.devOpsPipelineService = devOpsPipelineService;
-            this.devOpsGitService = devOpsGitService;
         }
 
         public override string ToString()
@@ -73,9 +71,19 @@ namespace Domain
             this.startDate = startDate;
         }
 
+        public DateTime GetStartDate()
+        {
+            return this.startDate;
+        }
+
         public void SetEndDate(DateTime endDate)
         {
             this.endDate = endDate;
+        }
+
+        public DateTime GetEndDate()
+        {
+            return this.endDate;
         }
 
         public ISprintState GetState()
@@ -121,12 +129,6 @@ namespace Domain
         public IDevOpsPipelineService GetDevOpsPipelineService()
         {
             return devOpsPipelineService;
-        }
-
-
-        public IDevOpsGitService GetDevOpsGitService()
-        {
-            return devOpsGitService;
         }
 
         public bool RunPipeline()

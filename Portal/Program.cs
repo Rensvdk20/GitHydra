@@ -34,7 +34,7 @@ namespace Portal
 
             EmployeeFactory factory = new EmployeeFactory();
             ScrumMaster testscrummaster = (ScrumMaster) factory.CreateEmployee("Peter", "peter@mail.com", "ScrumMaster");
-            var sprint = new ReleaseSprint("test", DateTime.Now, DateTime.Now, testscrummaster, new ExportPDF(), devOpsPipelineService, devOpsGitService);
+            var sprint = new ReleaseSprint("test", DateTime.Now, DateTime.Now, testscrummaster, new ExportPDF(), devOpsPipelineService);
 
             sprint.Subscribe(new EmailSubscriber());
             //sprint.Subscribe(new SlackSubscriber());
@@ -43,7 +43,7 @@ namespace Portal
             BacklogItem backlogitem = sprint.GetSprintBacklog().AddBacklogItem("Login feature", new Developer("Hans", "Hans@gmail.com"));
             //backlogitem.SetDeveloper(new Developer("Gert", "Gert@gmail.com"));
 
-            Project project = new Project("Call-a-Car", new ProductOwner("Henk", "henk@gmail.com"));
+            Project project = new Project("Call-a-Car", new ProductOwner("Henk", "henk@gmail.com"), devOpsGitService);
             project.AddSprint(sprint);
 
             //sprint.SetSprintState(new SprintCancelled(sprint));
@@ -65,7 +65,7 @@ namespace Portal
             backlogitem.GetActivities()[0].SetDone(true);
             backlogitem.SetState(new BacklogItemDone(backlogitem));
 
-            sprint.GetDevOpsGitService().Pull();
+            project.GetDevOpsGitService().Pull();
             //sprint.RunPipeline();
         }
     }
