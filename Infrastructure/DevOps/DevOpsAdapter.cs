@@ -1,8 +1,9 @@
 ﻿using Domain;
+using Domain.Interfaces;
 
 namespace Infrastructure.DevOps
 {
-    public class DevOpsAdapter : IDevOpsService
+    public class DevOpsAdapter : IDevOpsPipelineService, IDevOpsGitService
     {
         private readonly DevOpsPipeline _pipeline;
         private readonly DevOpsGit _git;

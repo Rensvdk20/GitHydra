@@ -110,7 +110,11 @@ namespace Domain
 
         public virtual bool IsChangeable()
         {
-            return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated") || !(_currentState is BacklogItemDone);
+            if (sprintBacklog != null)
+            {
+                return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated") || !(_currentState is BacklogItemDone);
+            }
+            return true;
         }
 
         public override string ToString()

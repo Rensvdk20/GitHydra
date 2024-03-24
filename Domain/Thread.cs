@@ -23,8 +23,10 @@ namespace Domain
                 messages.Add(message);
                 NotifyTeamMembersOfNewMessage();
             }
-
-            throw new InvalidOperationException("Can't add a message when the thread/backlog item/sprint is closed");
+            else
+            {
+                throw new InvalidOperationException("Can't add a message when the thread/backlog item/sprint is closed");
+            }
         }
 
         public List<IMessage> GetAllMessages()

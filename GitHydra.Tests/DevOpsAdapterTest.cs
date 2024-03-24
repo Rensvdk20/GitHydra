@@ -10,7 +10,8 @@ namespace GitHydra.Tests
         {
             // Arrange
             var pipelineMock = new Mock<DevOpsPipeline>();
-            var adapter = new DevOpsAdapter(pipelineMock.Object);
+            var gitMock = new Mock<DevOpsGit>();
+            var adapter = new DevOpsAdapter(pipelineMock.Object, gitMock.Object);
 
             // Act
             adapter.GetSource();
@@ -24,7 +25,8 @@ namespace GitHydra.Tests
         {
             // Arrange
             var pipelineMock = new Mock<DevOpsPipeline>();
-            var adapter = new DevOpsAdapter(pipelineMock.Object);
+            var gitMock = new Mock<DevOpsGit>();
+            var adapter = new DevOpsAdapter(pipelineMock.Object, gitMock.Object);
 
             // Act
             adapter.GetPackage();
@@ -38,7 +40,8 @@ namespace GitHydra.Tests
         {
             // Arrange
             var pipelineMock = new Mock<DevOpsPipeline>();
-            var adapter = new DevOpsAdapter(pipelineMock.Object);
+            var gitMock = new Mock<DevOpsGit>();
+            var adapter = new DevOpsAdapter(pipelineMock.Object, gitMock.Object);
 
             // Act
             adapter.GetTest();
@@ -52,7 +55,8 @@ namespace GitHydra.Tests
         {
             // Arrange
             var pipelineMock = new Mock<DevOpsPipeline>();
-            var adapter = new DevOpsAdapter(pipelineMock.Object);
+            var gitMock = new Mock<DevOpsGit>();
+            var adapter = new DevOpsAdapter(pipelineMock.Object, gitMock.Object);
 
             // Act
             adapter.GetAnalysis();
@@ -66,7 +70,8 @@ namespace GitHydra.Tests
         {
             // Arrange
             var pipelineMock = new Mock<DevOpsPipeline>();
-            var adapter = new DevOpsAdapter(pipelineMock.Object);
+            var gitMock = new Mock<DevOpsGit>();
+            var adapter = new DevOpsAdapter(pipelineMock.Object, gitMock.Object);
 
             // Act
             adapter.GetDeployment();
@@ -80,7 +85,8 @@ namespace GitHydra.Tests
         {
             // Arrange
             var pipelineMock = new Mock<DevOpsPipeline>();
-            var adapter = new DevOpsAdapter(pipelineMock.Object);
+            var gitMock = new Mock<DevOpsGit>();
+            var adapter = new DevOpsAdapter(pipelineMock.Object, gitMock.Object);
 
             // Act
             adapter.GetUtility();
