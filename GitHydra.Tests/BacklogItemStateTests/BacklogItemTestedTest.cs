@@ -69,6 +69,7 @@ namespace GitHydra.Tests.BacklogItemStateTests
         {
             // Arrange
             var backlogItemContextMock = new Mock<IBacklogItemContext>();
+            backlogItemContextMock.Setup(m => m.GetActivities()).Returns(new List<Activity>());
             var testedState = new BacklogItemTested(backlogItemContextMock.Object);
 
             // Act
