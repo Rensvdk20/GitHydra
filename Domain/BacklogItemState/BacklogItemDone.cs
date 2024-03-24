@@ -7,6 +7,15 @@
         public BacklogItemDone(IBacklogItemContext context)
         {
             this._context = context;
+
+            foreach (var activity in context.GetActivities())
+            {
+                if (!activity.GetDone())
+                {
+                    throw new InvalidOperationException(
+                        "Can't set a backlogitem on done when not all activities are done");
+                }
+            }
         }
 
         public void MoveToTodo()
