@@ -1,4 +1,4 @@
-﻿using Domain.BacklogItemState;
+using Domain.BacklogItemState;
 using Domain.Employees;
 using Domain.Observer;
 
@@ -12,20 +12,9 @@ namespace Domain
         private List<IThread> _threads;
         private Developer developer;
         private IBacklogItemState _currentState;
-        private SprintBacklog sprintBacklog;
+        private SprintBacklog? sprintBacklog;
 
-        public BacklogItem(string name, Developer developer)
-        {
-            // Parameters
-            this.developer = developer;
-
-            // Defaults
-            this._activities = new List<Activity>();
-            this._threads = new List<IThread>();
-            this._currentState = new BacklogItemState.BacklogItemTodo(this);
-        }
-
-        public BacklogItem(string name, Developer developer, SprintBacklog sprintBacklog)
+        public BacklogItem(string name, Developer developer, SprintBacklog? sprintBacklog = null)
         {
             // Parameters
             this.name = name;
@@ -98,7 +87,7 @@ namespace Domain
             }
 
             //Send message to scrum master
-            this.GetSprintBacklog().GetSprint().NotifySubscribers($"Developer {this.developer} has been replaced by {developer} in backlog item: {this.name}", "scrum master");
+            this.GetSprintBacklog()?.GetSprint().NotifySubscribers($"Developer {this.developer} has been replaced by {developer} in backlog item: {this.name}", "scrum master");
             this.developer = developer;
         }
 
@@ -109,7 +98,15 @@ namespace Domain
 
         public virtual bool IsChangeable()
         {
-            return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated") || !(_currentState is BacklogItemDone);
+            if (sprintBacklog != null)
+            {
+                if (sprintBacklog.GetSprint() != null)
+                {
+                    return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated") || !(_currentState is BacklogItemDone);
+                }
+            }
+
+            return true;
         }
 
         public override string ToString()
