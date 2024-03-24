@@ -2,8 +2,14 @@
 {
     public interface IThread
     {
-        public void AddMessage(IMessage message);
+        void AddMessage(IMessage message);
+        List<IMessage> GetAllMessages();
 
-        public void CloseThread();
+        void CloseThread();
+        bool GetStatus();
+        BacklogItem GetBacklogItem();
+        bool IsChangeable();
+        String GetTopic();
+        void NotifyTeamMembersOfNewMessage();
     }
 }
