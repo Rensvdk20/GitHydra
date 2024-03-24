@@ -13,6 +13,12 @@ namespace Domain.SprintState
         public SprintFinished(ISprintContext sprint)
         {
             _sprint = sprint;
+
+            if (sprint.GetReviewSummary() == null)
+            {
+                throw new InvalidOperationException("Cannot finish a sprint that doesn't have a review summary");
+            }
+
             _sprint.NotifySubscribers($"Sprint {sprint} is finished", "product owner");
             _sprint.NotifySubscribers($"Sprint {sprint} is finished", "scrum master");
         }
