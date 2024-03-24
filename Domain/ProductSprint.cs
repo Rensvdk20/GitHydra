@@ -13,6 +13,7 @@ namespace Domain
         private Boolean completed;
         private SprintBacklog sprintBacklog;
         private IExportStrategy exportStrategy;
+        private string reviewSummary;
 
         private ISprintState sprintState;
         private IEnumerable<Developer> developers;
@@ -36,6 +37,11 @@ namespace Domain
         public override string ToString()
         {
             return this.name;
+        }
+
+        public string GetReviewSummary()
+        {
+            return this.reviewSummary;
         }
 
         public void Export()
@@ -100,6 +106,11 @@ namespace Domain
         public Project GetProject()
         {
             return this.project ?? throw new InvalidOperationException("This sprint is not attached to a project");
+        }
+
+        public void SetReviewSummary()
+        {
+            this.reviewSummary = reviewSummary;
         }
     }
 }

@@ -9,5 +9,6 @@
         void SetEndDate(DateTime endDate);
         void NotifySubscribers(string message, string employee);
         string ToString();
+        string GetReviewSummary();
     }
 }
