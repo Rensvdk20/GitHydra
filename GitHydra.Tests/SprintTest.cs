@@ -18,8 +18,9 @@ namespace GitHydra.Tests
             Console.SetOut(stringWriter);
 
             var exportMethod = new ExportPDF();
-            var devOpsService = new DevOpsService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
-            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod, devOpsService);
+            var devOpsPipelineService = new DevOpsPipelineService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
+            var devOpsGitService = new DevOpsGitService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
+            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod, devOpsPipelineService, devOpsGitService);
 
             // Act
             sprint.Export();
@@ -38,8 +39,9 @@ namespace GitHydra.Tests
             Console.SetOut(stringWriter);
 
             var exportMethod = new ExportPNG();
-            var devOpsService = new DevOpsService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
-            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod, devOpsService);
+            var devOpsPipelineService = new DevOpsPipelineService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
+            var devOpsGitService = new DevOpsGitService(new DevOpsAdapter(new DevOpsPipeline(), new DevOpsGit()));
+            var sprint = new ReleaseSprint("Login feature", DateTime.Now, DateTime.Now, new ScrumMaster("Mark", "Mark@gmail.com"), exportMethod, devOpsPipelineService, devOpsGitService);
 
             // Act
             sprint.Export();

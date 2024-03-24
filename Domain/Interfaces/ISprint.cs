@@ -16,6 +16,7 @@ namespace Domain
         void NotifySubscribers(string message, string employee);
         void SetProject(Project project);
         Project GetProject();
-        void SetReviewSummary();
+        void SetReviewSummary(string review);
+        string GetReviewSummary();
     }
 }
