@@ -1,4 +1,5 @@
-﻿using Domain.Employees;
+﻿using Domain.BacklogItemState;
+using Domain.Employees;
 using Domain.Observer;
 
 namespace Domain
@@ -108,7 +109,7 @@ namespace Domain
 
         public virtual bool IsChangeable()
         {
-            return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated");
+            return sprintBacklog.GetSprint().GetState().GetType().Name.Equals("SprintCreated") || !(_currentState is BacklogItemDone);
         }
 
         public override string ToString()
